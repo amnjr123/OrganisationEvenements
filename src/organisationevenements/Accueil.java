@@ -28,7 +28,7 @@ public class Accueil extends JFrame {
     
 
     public Accueil() {
-        JOptionPane.showMessageDialog(this, "Yaarebbi nkoune ghi kanhlem");
+        JOptionPane.showMessageDialog(this, "Yaarebbi nkoune ghi kanhlem, wise words");
         this.design();
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setVisible(true);
