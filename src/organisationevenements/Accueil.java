@@ -1,8 +1,3 @@
-﻿/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
 package organisationevenements;
 
 import java.awt.BorderLayout;
@@ -12,14 +7,11 @@ import javax.swing.BorderFactory;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JFrame;
+import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-//test
-/**5646666666666666666666
- *
- * @author Amine
- */
+
 public class Accueil extends JFrame {
 
     //Declaration panels
@@ -36,6 +28,7 @@ public class Accueil extends JFrame {
     
 
     public Accueil() {
+        JOptionPane.showMessageDialog(this, "Yaarebbi nkoune ghi kanhlem");
         this.design();
         this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setVisible(true);
