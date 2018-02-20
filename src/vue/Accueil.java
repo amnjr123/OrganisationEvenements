@@ -1,4 +1,4 @@
-package organisationevenements;
+package vue;
 
 import java.awt.BorderLayout;
 import java.awt.LayoutManager;

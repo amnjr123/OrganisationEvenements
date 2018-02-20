@@ -1,4 +1,4 @@
-package organisationevenements;
+package vue;
 
 public class OrganisationEvenements {
 
