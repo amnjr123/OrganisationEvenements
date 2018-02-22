@@ -24,13 +24,11 @@ public class Accueil extends JFrame {
     //Declaration objets acces
     private JComboBox cbUtilisateur;
     private JButton bAcces;
-    private String[] lUtilisateurs = {"Organnisme", "Organisateur", "Abonn√©"};
+    private String[] lUtilisateurs = {"Organnisme", "Organisateur", "AbonnÈ"};
     
 
     public Accueil() {
-        JOptionPane.showMessageDialog(this, "Yaarebbi nkoune ghi kanhlem, wise words");
         this.design();
-        this.setDefaultCloseOperation(this.EXIT_ON_CLOSE);
         this.setVisible(true);
     }
 
@@ -44,19 +42,19 @@ public class Accueil extends JFrame {
         this.add(pPrincipal, BorderLayout.CENTER);
         //panel Acc√®s
         pAcces = new JPanel();
-        pAcces.setBorder(BorderFactory.createTitledBorder("Acc√®s"));
+        pAcces.setBorder(BorderFactory.createTitledBorder("AccËs"));
         pPrincipal.add(pAcces, BorderLayout.NORTH);
         cbUtilisateur = new JComboBox(lUtilisateurs);
-        bAcces = new JButton("Acc√©der");
+        bAcces = new JButton("AccÈder");
         pAcces.add(cbUtilisateur);
         pAcces.add(bAcces);
         //Panel Consultation
         pConsultation= new JScrollPane();
-        pConsultation.setBorder(BorderFactory.createTitledBorder("Liste d'√©v√©nements"));
+        pConsultation.setBorder(BorderFactory.createTitledBorder("Liste d'ÈvËnements"));
         pPrincipal.add(pConsultation, BorderLayout.CENTER);
         //Table consultation
         tConsultation=new JTable();
-        
+        this.setLocationRelativeTo(null);
     }
 
     public JTable gettConsultation() {

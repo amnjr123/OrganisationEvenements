@@ -7,7 +7,6 @@ public class Abonne extends Personne {
    
    public java.util.Collection<Evenement> evenement;
    
-   
    public java.util.Collection<Evenement> getEvenement() {
       if (evenement == null)
          evenement = new java.util.HashSet<Evenement>();
