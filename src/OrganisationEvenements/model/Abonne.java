@@ -7,6 +7,12 @@ public class Abonne extends Personne {
 	private String adresse;
 	public Collection<Evenement> evenement;
 
+	public Abonne(){
+		super("","","","");
+		this.tel = "";
+		this.email = "";
+		this.adresse = "";
+	}
 	public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse) {
 		super(nom, prenom, login, mdp);
 		this.tel = tel;

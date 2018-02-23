@@ -9,7 +9,6 @@ public class Lists {
 	public ArrayList<Abonne> abonneList;
 	public ArrayList<Organisateur> organisateurList;
 	public ArrayList<GestionnaireOrganisme> gestionnaireOrganismeList;
-	
 	public ArrayList<Salle> salleList;
     public ArrayList<Evenement> evt;
 
