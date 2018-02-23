@@ -10,20 +10,16 @@ public class Evenement {
    private String validation;
    
    public Salle salle;
-   public Collection<Abonne> abonne;
-   public GestionnaireOrganisme gestionnaireOrganisme;
+	public Collection<Abonne> abonne;
+	   public GestionnaireOrganisme gestionnaireOrganisme;   
    
-   
-   
-   public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota, String validation,
-		Salle salle) {
+   public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota) {
 	this.type = type;
 	this.titre = titre;
 	this.detailEvenement = detailEvenement;
 	this.villeConcernee = villeConcernee;
 	this.quota = quota;
-	this.validation = validation;
-	this.salle = salle;
+	this.validation = "en Cours";
 }
 
 public Salle getSalle() {

@@ -1,7 +1,13 @@
 package OrganisationEvenements.view;
 
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.*;
 import javax.swing.*;
+import OrganisationEvenements.controller.*;
+import OrganisationEvenements.model.*;
+
 public class Accueil extends JFrame {
 
 	// Declaration panels
@@ -13,9 +19,11 @@ public class Accueil extends JFrame {
 	// Declaration objets acces
 	private JComboBox<String> cbUtilisateur;
 	private JButton bAcces;
-	private String[] lUtilisateurs = { "Organnisme", "Organisateur", "Abonné" };
-
+	private String[] lUtilisateurs = { "Organisme", "Organisateur", "Abonné" };
+	private Lists lists ;
+	
 	public Accueil() {
+		lists = new Lists();
 		this.design();
 		this.setVisible(true);
 	}
@@ -33,8 +41,32 @@ public class Accueil extends JFrame {
 		pAcces.setBorder(BorderFactory.createTitledBorder("Accès"));
 		pPrincipal.add(pAcces, BorderLayout.NORTH);
 		cbUtilisateur = new JComboBox<String>(lUtilisateurs);
+		/* Button COnnexion */
 		bAcces = new JButton("Accéder");
 		pAcces.add(cbUtilisateur);
+		bAcces.addActionListener(new ActionListener() {
+			@Override
+			public void actionPerformed(java.awt.event.ActionEvent evt) {
+				if (cbUtilisateur.getSelectedItem() == "Organisme"){
+					Hashtable<String,String> t =login();
+					for(Abonne a : lists.getAbonneList()){
+						if(t.get("login").equals(a.getLogin())){
+							new InterfaceAbonne();
+						}
+					}
+					System.out.println(login().get("login"));
+				}
+				else if (cbUtilisateur.getSelectedItem() == "Organisateur")
+					System.out.println("mazal maqadina Organisateur");// veritf
+																		// existant
+																		// abonné
+				else
+					System.out.println("mazal maqadina abonne");// veritf
+																// existant
+																// abonné
+			}
+		});
+
 		pAcces.add(bAcces);
 		// Panel Consultation
 		pConsultation = new JScrollPane();
@@ -56,5 +88,32 @@ public class Accueil extends JFrame {
 	public JButton getbAcces() {
 		return bAcces;
 	}
+	
+	public Lists getbList() {
+		return lists;
+	}
+	
+	public Hashtable<String, String> login() {
+		Hashtable<String, String> logininformation = new Hashtable<String, String>();
 
+		JPanel panel = new JPanel(new BorderLayout(5, 5));
+
+		JPanel label = new JPanel(new GridLayout(0, 1, 2, 2));
+		label.add(new JLabel("Login", SwingConstants.RIGHT));
+		label.add(new JLabel("Password", SwingConstants.RIGHT));
+		panel.add(label, BorderLayout.WEST);
+
+		JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
+		JTextField username = new JTextField();
+		controls.add(username);
+		JPasswordField password = new JPasswordField();
+		controls.add(password);
+		panel.add(controls, BorderLayout.CENTER);
+
+		JOptionPane.showMessageDialog(this, panel, "Login", JOptionPane.QUESTION_MESSAGE);
+
+		logininformation.put("login", username.getText());
+		logininformation.put("password", new String(password.getPassword()));
+		return logininformation;
+	}
 }
