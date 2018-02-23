@@ -3,15 +3,15 @@ package OrganisationEvenements.controller;
 import OrganisationEvenements.model.*;
 
 import java.util.ArrayList;
-import java.util.Collection;
+import java.util.ArrayList;
 
 public class Lists {
-	public Collection<Abonne> abonneList;
-	public Collection<Organisateur> organisateurList;
-	public Collection<GestionnaireOrganisme> gestionnaireOrganismeList;
+	public ArrayList<Abonne> abonneList;
+	public ArrayList<Organisateur> organisateurList;
+	public ArrayList<GestionnaireOrganisme> gestionnaireOrganismeList;
 	
-	public Collection<Salle> salleList;
-    public Collection<Evenement> evt;
+	public ArrayList<Salle> salleList;
+    public ArrayList<Evenement> evt;
 
 	public Lists() {
 		abonneList= new ArrayList<Abonne>();
@@ -21,23 +21,23 @@ public class Lists {
 		evt	= new ArrayList<Evenement>();
 	}
 
-	public Collection<Abonne> getAbonneList() {
+	public ArrayList<Abonne> getAbonneList() {
 		return abonneList;
 	}
 
-	public Collection<Organisateur> getOrganisateurList() {
+	public ArrayList<Organisateur> getOrganisateurList() {
 		return organisateurList;
 	}
 
-	public Collection<GestionnaireOrganisme> getGestionnaireOrganismeList() {
+	public ArrayList<GestionnaireOrganisme> getGestionnaireOrganismeList() {
 		return gestionnaireOrganismeList;
 	}
 
-	public Collection<Salle> getSalleList() {
+	public ArrayList<Salle> getSalleList() {
 		return salleList;
 	}
 
-	public Collection<Evenement> getEvt() {
+	public ArrayList<Evenement> getEvt() {
 		return evt;
 	}
 	

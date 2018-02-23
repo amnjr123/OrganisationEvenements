@@ -48,13 +48,19 @@ public class Accueil extends JFrame {
 			@Override
 			public void actionPerformed(java.awt.event.ActionEvent evt) {
 				if (cbUtilisateur.getSelectedItem() == "Organisme"){
-					Hashtable<String,String> t =login();
+					boolean exist=false;
+					
+					Hashtable<String,String> t = login();
+					
 					for(Abonne a : lists.getAbonneList()){
-						if(t.get("login").equals(a.getLogin())){
+						if(t.get("login").equals(a.getLogin()) && t.get("password").equals(a.getMdp())){
+							exist=true;
 							new InterfaceAbonne();
 						}
 					}
-					System.out.println(login().get("login"));
+					if(!exist){
+						//new InterfaceAbonneRegister();
+					}
 				}
 				else if (cbUtilisateur.getSelectedItem() == "Organisateur")
 					System.out.println("mazal maqadina Organisateur");// veritf
@@ -88,10 +94,11 @@ public class Accueil extends JFrame {
 	public JButton getbAcces() {
 		return bAcces;
 	}
-	
+	/*
 	public Lists getbList() {
 		return lists;
 	}
+	*/
 	
 	public Hashtable<String, String> login() {
 		Hashtable<String, String> logininformation = new Hashtable<String, String>();
