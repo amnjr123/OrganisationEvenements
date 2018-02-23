@@ -3,103 +3,114 @@ package OrganisationEvenements.model;
 import java.util.*;
 
 public class Evenement {
-	private String type;
-	private String titre;
-	private String detailEvenement;
-	private String villeConcernee;
-	private int quota;
-	private String validation;
 
-	public Salle salle;
-	public ArrayList<Abonne> abonne;
+    private String type;
+    private String titre;
+    private String detailEvenement;
+    private String villeConcernee;
+    private int quota;
+    private String validation;
 
-	public GestionnaireOrganisme gestionnaireOrganisme;
+    private Salle salle;
+    private ArrayList<Abonne> abonne;
 
-	public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota) {
-		this.type = type;
-		this.titre = titre;
-		this.detailEvenement = detailEvenement;
-		this.villeConcernee = villeConcernee;
-		this.quota = quota;
-		this.validation = "en Cours";
-	}
+    public GestionnaireOrganisme gestionnaireOrganisme;
 
-	public String getType() {
-		return type;
-	}
+    public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota) {
+        this.type = type;
+        this.titre = titre;
+        this.detailEvenement = detailEvenement;
+        this.villeConcernee = villeConcernee;
+        this.quota = quota;
+        this.validation = "En cours";
+    }
 
-	public void setType(String type) {
-		this.type = type;
-	}
+    public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota, Salle salle) {
+        this.type = type;
+        this.titre = titre;
+        this.detailEvenement = detailEvenement;
+        this.villeConcernee = villeConcernee;
+        this.quota = quota;
+        this.validation = "En cours";
+        this.salle=salle;
+    }
 
-	public String getTitre() {
-		return titre;
-	}
+    public String getType() {
+        return type;
+    }
 
-	public void setTitre(String titre) {
-		this.titre = titre;
-	}
+    public void setType(String type) {
+        this.type = type;
+    }
 
-	public String getDetailEvenement() {
-		return detailEvenement;
-	}
+    public String getTitre() {
+        return titre;
+    }
 
-	public void setDetailEvenement(String detailEvenement) {
-		this.detailEvenement = detailEvenement;
-	}
+    public void setTitre(String titre) {
+        this.titre = titre;
+    }
 
-	public String getVilleConcernee() {
-		return villeConcernee;
-	}
+    public String getDetailEvenement() {
+        return detailEvenement;
+    }
 
-	public void setVilleConcernee(String villeConcernee) {
-		this.villeConcernee = villeConcernee;
-	}
+    public void setDetailEvenement(String detailEvenement) {
+        this.detailEvenement = detailEvenement;
+    }
 
-	public int getQuota() {
-		return quota;
-	}
+    public String getVilleConcernee() {
+        return villeConcernee;
+    }
 
-	public void setQuota(int quota) {
-		this.quota = quota;
-	}
+    public void setVilleConcernee(String villeConcernee) {
+        this.villeConcernee = villeConcernee;
+    }
 
-	public String getValidation() {
-		return validation;
-	}
+    public int getQuota() {
+        return quota;
+    }
 
-	public void setValidation(String validation) {
-		this.validation = validation;
-	}
+    public void setQuota(int quota) {
+        this.quota = quota;
+    }
 
-	public GestionnaireOrganisme getGestionnaireOrganisme() {
-		return gestionnaireOrganisme;
-	}
+    public String getValidation() {
+        return validation;
+    }
 
-	public void setGestionnaireOrganisme(GestionnaireOrganisme gestionnaireOrganisme) {
-		this.gestionnaireOrganisme = gestionnaireOrganisme;
-	}
+    public void setValidation(String validation) {
+        this.validation = validation;
+    }
 
-	public ArrayList<Abonne> getAbonne() {
-		return abonne;
-	}
+    public GestionnaireOrganisme getGestionnaireOrganisme() {
+        return gestionnaireOrganisme;
+    }
 
-	public Salle getSalle() {
-		return salle;
-	}
+    public void setGestionnaireOrganisme(GestionnaireOrganisme gestionnaireOrganisme) {
+        this.gestionnaireOrganisme = gestionnaireOrganisme;
+    }
 
-	public void setSalle(Salle newSalle) {
-		if (this.salle == null || !this.salle.equals(newSalle)) {
-			if (this.salle != null) {
-				Salle oldSalle = this.salle;
-				this.salle = null;
-				oldSalle.removeEvenement(this);
-			}
-			if (newSalle != null) {
-				this.salle = newSalle;
-				this.salle.addEvenement(this);
-			}
-		}
-	}
+    public ArrayList<Abonne> getAbonne() {
+        return abonne;
+    }
+
+    public Salle getSalle() {
+        return salle;
+    }
+
+    public void setSalle(Salle newSalle) {
+        if (this.salle == null || !this.salle.equals(newSalle)) {
+            if (this.salle != null) {
+                Salle oldSalle = this.salle;
+                this.salle = null;
+                oldSalle.removeEvenement(this);
+            }
+            if (newSalle != null) {
+                this.salle = newSalle;
+                this.salle.addEvenement(this);
+            }
+        }
+    }
 
 }
