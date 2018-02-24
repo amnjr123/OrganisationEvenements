@@ -1,12 +1,8 @@
 package OrganisationEvenements.view;
 
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.util.*;
 import javax.swing.*;
-import javax.swing.table.AbstractTableModel;
-
 import OrganisationEvenements.controller.*;
 import OrganisationEvenements.model.*;
 import javax.swing.table.DefaultTableModel;
@@ -24,7 +20,6 @@ public class Accueil extends JFrame {
     private JButton bAcces;
     private String[] lUtilisateurs = {"Organisme", "Organisateur", "Abonne"};
     public static Lists lists;
-    private ActionListener alAcces;
     private DefaultTableModel dtmEvenement;
     private String[] entetes = {"Type", "Titre", "Detail evenement", "Ville Concernee", "quota", "Validation","Salle","Ville de la salle","Adresse de la salle"};
 
@@ -37,7 +32,14 @@ public class Accueil extends JFrame {
 
     public void remplirTableEvenement() {
         lists.remplirListEvtTest();
-        dtmEvenement = new DefaultTableModel(entetes, 0);
+        dtmEvenement = new DefaultTableModel(entetes, 0){
+        		/*Non editable*/
+            @Override
+            public boolean isCellEditable(int row, int column) {
+               //all cells false
+               return false;
+            }
+        };;
         for (int i = 0; i < lists.getEvt().size(); i++) {
             String type = lists.getEvt().get(i).getType();
             String titre = lists.getEvt().get(i).getTitre();
@@ -57,12 +59,8 @@ public class Accueil extends JFrame {
                 villeSalle="";
                 adresseSalle="";
             }
-
-
             Object[] data = {type,titre,detailEvenement,ville,quota,validation,nomSalle,villeSalle,adresseSalle};
-
             dtmEvenement.addRow(data);
-
         }
         tConsultation.setModel(dtmEvenement);
 
@@ -87,22 +85,17 @@ public class Accueil extends JFrame {
         /**
          * Button config actionListener
          */
-        alAcces = new ActionListener() {
-            @Override
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                if (cbUtilisateur.getSelectedItem() == "Organisme") {
-                    afficherInterfaceAbonne();
-                } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-                    System.out.println("mazal maqadina Organisateur");// veritf
-                } // existant
-                // abonn�
-                else {
-                    System.out.println("mazal maqadina abonne");// veritf
-                }																// existant
-                // abonn�
-            }
-        };
-        bAcces.addActionListener(alAcces);
+        /*JDK 8 Notation*/
+        bAcces.addActionListener(e ->{
+            if (cbUtilisateur.getSelectedItem() == "Abonne") {
+                afficherInterfaceAbonne();
+            } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
+                System.out.println("mazal maqadina Organisateur");
+            } 
+            else {
+                System.out.println("mazal maqadina Organisme");
+            }			  
+   });
         /*End button config*/
         pAcces.add(bAcces);
         // Panel Consultation
@@ -167,7 +160,7 @@ public class Accueil extends JFrame {
                 exist = true;
                 ab = a;
                 this.setVisible(false);
-                new InterfaceAbonne();
+                new InterfaceAbonne(ab);
             }
         }
         if (!exist) {
@@ -176,39 +169,3 @@ public class Accueil extends JFrame {
         return ab;
     }
 }
-/*
-class TableEvenements extends AbstractTableModel {
-
-    private final Object[][] donnees;
-    private final String[] entetes = {"Type", "Titre", "D�tail �v�nement", "Ville Concernee", "quota", "validation", "Salle"};
-
-    public TableEvenements() {
-        super();
-        donnees = new Object[Accueil.lists.getEvt().size() / 2][2];/*{
-                {"Johnathan", "Sykes", Color.red, true, Sport.TENNIS},
-                {"Nicolas", "Van de Kampf", Color.black, true, Sport.FOOTBALL},
-                {"Damien", "Cuthbert", Color.cyan, true, Sport.RIEN},
-                {"Corinne", "Valance", Color.blue, false, Sport.NATATION},
-                {"Emilie", "Schr�dinger", Color.magenta, false, Sport.FOOTBALL},
-                {"Delphine", "Duke", Color.yellow, false, Sport.TENNIS},
-                {"Eric", "Trump", Color.pink, true, Sport.FOOTBALL},
-        };
-    }
-
-    public int getRowCount() {
-        return donnees.length;
-    }
-
-    public int getColumnCount() {
-        return entetes.length;
-    }
-
-    public String getColumnName(int columnIndex) {
-        return entetes[columnIndex];
-    }
-
-    public Object getValueAt(int rowIndex, int columnIndex) {
-        return donnees[rowIndex][columnIndex];
-    }
-}
-*/

@@ -5,19 +5,21 @@ public class Abonne extends Personne {
 	private String tel;
 	private String email;
 	private String adresse;
-	public Collection<Evenement> evenement;
+	public ArrayList<Evenement> evenement;
 
 	public Abonne(){
 		super("","","","");
 		this.tel = "";
 		this.email = "";
 		this.adresse = "";
+		evenement = new ArrayList<Evenement>();
 	}
 	public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse) {
 		super(nom, prenom, login, mdp);
 		this.tel = tel;
 		this.email = email;
 		this.adresse = adresse;
+		evenement = new ArrayList<Evenement>();
 	}
 
 	public String toString() {
@@ -48,19 +50,15 @@ public class Abonne extends Personne {
 		this.adresse = adresse;
 	}
 
-	public Collection<Evenement> getEvenement() {
+	public ArrayList<Evenement> getEvenement() {
 		if (evenement == null)
-			evenement = new java.util.HashSet<Evenement>();
+			evenement = new ArrayList<Evenement>();
 		return evenement;
 	}
 
-	public Iterator<Evenement> getIteratorEvenement() {
-		if (evenement == null)
-			evenement = new java.util.HashSet<Evenement>();
-		return evenement.iterator();
-	}
+	
 
-	public void setEvenement(Collection<Evenement> newEvenement) {
+	public void setEvenement(ArrayList<Evenement> newEvenement) {
 		removeAllEvenement();
 		for (Iterator<Evenement> iter = newEvenement.iterator(); iter.hasNext();)
 			addEvenement((Evenement) iter.next());
@@ -70,7 +68,7 @@ public class Abonne extends Personne {
 		if (newEvenement == null)
 			return;
 		if (this.evenement == null)
-			this.evenement = new HashSet<Evenement>();
+			this.evenement = new ArrayList<Evenement>();
 		if (!this.evenement.contains(newEvenement))
 			this.evenement.add(newEvenement);
 	}

@@ -12,6 +12,13 @@ public class Salle {
 	public GestionnaireOrganisme gestionnaireOrganisme;
 
 	
+	public Salle(){
+		this.nom = "";
+		this.ville = "";
+		this.region = "";
+		this.adresse = "";
+		this.nbPlaces = 0;
+	}
 	
 	public Salle(String nom, String ville, String region, String adresse, int nbPlaces) {
 		this.nom = nom;

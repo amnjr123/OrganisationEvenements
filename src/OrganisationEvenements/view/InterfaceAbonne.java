@@ -5,17 +5,26 @@ import java.awt.Rectangle;
 
 import javax.swing.*;
 
-public class InterfaceAbonne extends JFrame{
-		
-	public InterfaceAbonne(){
-		this.design();
+import OrganisationEvenements.model.Abonne;
+
+public class InterfaceAbonne extends JFrame {
+
+	
+	public InterfaceAbonne(Abonne a) {
+		this.design(a);
+		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		this.setVisible(true);
 	}
-	
-	public void design(){
+
+	public void design(Abonne a) {
 		this.setTitle("Interface abonne");
 		this.setBounds(new Rectangle(0, 0, 900, 500));
 		this.setLayout(new BorderLayout());
 		
+		
+		
+		
+		this.setLocationRelativeTo(null);
+
 	}
 }

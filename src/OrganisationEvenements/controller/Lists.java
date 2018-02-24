@@ -3,7 +3,7 @@ package OrganisationEvenements.controller;
 import OrganisationEvenements.model.*;
 
 import java.util.ArrayList;
-import java.util.ArrayList;
+
 
 public class Lists {
 
@@ -23,6 +23,7 @@ public class Lists {
 
     public void remplirListEvtTest() {
         Salle salle1 = new Salle("9ism ra9m 8", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
+        abonneList.add(new Abonne("BOUDYACH","Anas","zbilax","xperia","0614845937","anas.boudyach@gmail.com","87 cours gambetta"));
         
         evt.add(new Evenement("cont", "yarebbinkouneghikanhle", "detail1", "Aglou", 10, salle1));
         evt.add(new Evenement("cont1", "Swing", "detail2", "Asfi", 10, salle1));
