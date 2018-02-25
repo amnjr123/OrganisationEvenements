@@ -160,8 +160,9 @@ public class InterfaceAbonne extends JFrame {
                 a.setAdresse(tAddress.getText());
                 a.setEmail(tEmail.getText());
                 OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
+                
+                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(tLogin.getText(), new String(tPassword.getPassword()), 'm');
                 this.dispose();
-                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
                 //this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
                 for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){

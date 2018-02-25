@@ -52,7 +52,7 @@ public class Accueil extends JFrame {
         /* JDK 8 Notation */
         bAcces.addActionListener(e -> {
             if (cbUtilisateur.getSelectedItem() == "Abonne") {
-                afficherInterfaceAbonne('m');
+                afficherInterfaceAbonne(null, null, 'm');
             } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
                 afficherInterfaceOrganisateur();
             } else {
@@ -61,7 +61,7 @@ public class Accueil extends JFrame {
         });
         bCreation.addActionListener(e -> {
             if (cbUtilisateur.getSelectedItem() == "Abonne") {
-                afficherInterfaceAbonne('c');
+                afficherInterfaceAbonne(null,null,'c');
             } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
                 afficherInterfaceOrganisateur();
             } else {
@@ -165,15 +165,19 @@ public class Accueil extends JFrame {
         return logininformation;
     }
 
-    public Abonne afficherInterfaceAbonne(char nature) {
+    public Abonne afficherInterfaceAbonne(String lg, String pw, char nature) {
         boolean exist = false;
         Abonne ab = new Abonne();
         if (nature == 'm') {
-            Hashtable<String, String> t = login();
-            
+            Hashtable<String, String> t;
+            if (lg == null && pw == null) {
+                t = login();
+                lg = t.get("login");
+                pw = t.get("password");
+            }
 
             for (Abonne a : OrganisationEvenements.getLists().getAbonneList()) {
-                if (t.get("login").equals(a.getLogin()) && t.get("password").equals(a.getMdp())) {
+                if (lg.equals(a.getLogin()) && pw.equals(a.getMdp())) {
                     exist = true;
                     ab = a;
                     this.setVisible(false);
@@ -183,7 +187,7 @@ public class Accueil extends JFrame {
             if (!exist) {
                 JOptionPane.showMessageDialog(this, "Compte Abonne non trouve, penser a en creer un");
             }
-        }else{
+        } else {
             new InterfaceAbonne(ab, nature);
         }
         return ab;
