@@ -1,6 +1,7 @@
 package OrganisationEvenements.view;
 
 import java.awt.BorderLayout;
+import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
 
@@ -21,8 +22,8 @@ public class InterfaceAbonne extends JFrame {
     private JLabel lPassword = new JLabel("Mot de passe : ");
     private JLabel lPasswordConfirm = new JLabel("Confirmez le mot de passe : ");
     private JLabel lLastName = new JLabel("Nom : ");
-    private JLabel lFirstName = new JLabel("Pr�nom : ");
-    private JLabel lTel = new JLabel("N� T�l�phone : ");
+    private JLabel lFirstName = new JLabel("Prenom : ");
+    private JLabel lTel = new JLabel("Numero Telephone : ");
     private JLabel lEmail = new JLabel("Adresse E-mail : ");
     private JLabel lAddress = new JLabel("Adresse Postale : ");
     private JTextField tLogin = new JTextField();
@@ -57,8 +58,15 @@ public class InterfaceAbonne extends JFrame {
         pPrincp.add(pForm, BorderLayout.CENTER);
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
         GroupLayout formLayoutMgr = new GroupLayout(pForm);
+<<<<<<< HEAD
         pForm.setLayout(formLayoutMgr);
         tAddress.setBorder(tEmail.getBorder());
+=======
+        pForm.setLayout(formLayoutMgr);;
+
+        tAddress.setBorder(tEmail.getBorder());
+        
+>>>>>>> da949f83e7de7dc82e032f3838642933927fc855
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
         GroupLayout.SequentialGroup hGroup = formLayoutMgr.createSequentialGroup();
