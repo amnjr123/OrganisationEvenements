@@ -64,6 +64,7 @@ public class Accueil extends JFrame {
 		pPrincipal.add(pConsultation, BorderLayout.CENTER);
 		// Table consultation
 		tConsultation = new JTable();
+		tConsultation.clearSelection();
 		remplirTableEvenement();
 		pConsultation.setViewportView(tConsultation);
 
@@ -84,12 +85,12 @@ public class Accueil extends JFrame {
 		return bAcces;
 	}
 
-	
-
 	public void remplirTableEvenement() {
-		OrganisationEvenements.getbList().remplirListEvtTest();
-		Lists lists = OrganisationEvenements.getbList() ;
-		
+		/*Bach maykonch tikrar f la table une fois revenu l accueil*/
+		if(OrganisationEvenements.getbList().getEvt().isEmpty())
+			OrganisationEvenements.getbList().remplirListEvtTest();
+		Lists lists = OrganisationEvenements.getbList();
+
 		dtmEvenement = new DefaultTableModel(entetes, 0) {
 			/* Non editable */
 			@Override
@@ -123,7 +124,8 @@ public class Accueil extends JFrame {
 		}
 		tConsultation.setModel(dtmEvenement);
 	}
-/*	Log Accès*/
+
+	/* Log Accès */
 	public Hashtable<String, String> login() {
 		Hashtable<String, String> logininformation = new Hashtable<String, String>();
 
@@ -185,6 +187,7 @@ public class Accueil extends JFrame {
 		}
 		return ab;
 	}
+
 	public GestionnaireOrganisme afficherInterfaceGestionnaireOrganisme() {
 		boolean exist = false;
 		GestionnaireOrganisme ab = new GestionnaireOrganisme();
