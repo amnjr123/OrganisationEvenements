@@ -14,7 +14,7 @@ public class InterfaceOrganisateur extends JFrame {
 	}
 
 	public void design(Organisateur o) {
-		this.setTitle("Interface abonne");
+		this.setTitle("Interface organisateur");
 		this.setBounds(new Rectangle(0, 0, 900, 500));
 		this.setLayout(new BorderLayout());
 		this.setLocationRelativeTo(null);

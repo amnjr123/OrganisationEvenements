@@ -14,7 +14,7 @@ public class InterfaceGestionnaireOrganisme extends JFrame {
 	}
 
 	public void design(GestionnaireOrganisme o) {
-		this.setTitle("Interface abonne");
+		this.setTitle("Interface gestionnaire organisme");
 		this.setBounds(new Rectangle(0, 0, 900, 500));
 		this.setLayout(new BorderLayout());
 		this.setLocationRelativeTo(null);

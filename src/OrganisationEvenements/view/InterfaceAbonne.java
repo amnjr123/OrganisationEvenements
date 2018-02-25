@@ -58,7 +58,7 @@ public class InterfaceAbonne extends JFrame {
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
         GroupLayout formLayoutMgr = new GroupLayout(pForm);
         pForm.setLayout(formLayoutMgr);
-
+        tAddress.setBorder(tEmail.getBorder());
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
         GroupLayout.SequentialGroup hGroup = formLayoutMgr.createSequentialGroup();
