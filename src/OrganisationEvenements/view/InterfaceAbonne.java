@@ -58,19 +58,20 @@ public class InterfaceAbonne extends JFrame {
         pPrincp.add(pForm, BorderLayout.CENTER);
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
         GroupLayout formLayoutMgr = new GroupLayout(pForm);
-<<<<<<< HEAD
+
         pForm.setLayout(formLayoutMgr);
         tAddress.setBorder(tEmail.getBorder());
-=======
+
         pForm.setLayout(formLayoutMgr);;
 
         tAddress.setBorder(tEmail.getBorder());
+
         
->>>>>>> da949f83e7de7dc82e032f3838642933927fc855
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
         GroupLayout.SequentialGroup hGroup = formLayoutMgr.createSequentialGroup();
         hGroup.addGroup(formLayoutMgr.createParallelGroup().
+                addComponent(lEmail).
                 addComponent(lLogin).
                 addComponent(lPassword).
                 addComponent(lPasswordConfirm).
@@ -79,19 +80,22 @@ public class InterfaceAbonne extends JFrame {
                 addComponent(lTel).
                 addComponent(lAddress));
         hGroup.addGroup(formLayoutMgr.createParallelGroup().
-                addComponent(tLogin, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tPassword, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tPasswordConfirm, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tLastName, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tFirstName, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tTel, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE).
-                addComponent(tAddress, 0, GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE));
+                addComponent(tEmail).
+                addComponent(tLogin).
+                addComponent(tPassword).
+                addComponent(tPasswordConfirm).
+                addComponent(tLastName).
+                addComponent(tFirstName).
+                addComponent(tTel).
+                addComponent(tAddress));
         formLayoutMgr.setHorizontalGroup(hGroup);
 
         //Groupe sequentiel Vertical
         GroupLayout.SequentialGroup vGroup = formLayoutMgr.createSequentialGroup();
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
-                addComponent(lLogin).addComponent(tLogin));
+                addComponent(lEmail).addComponent(tEmail));
+        vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
+                addComponent(lLogin).addComponent(tLogin));        
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
                 addComponent(lPassword).addComponent(tPassword));
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
