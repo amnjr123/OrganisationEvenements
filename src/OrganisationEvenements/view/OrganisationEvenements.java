@@ -1,8 +1,16 @@
 package OrganisationEvenements.view;
 
-public class OrganisationEvenements {
+import OrganisationEvenements.controller.Lists;
 
-    public static void main(String[] args) {
-        new Accueil();
-    }
+public class OrganisationEvenements {
+	private static Lists lists;
+	
+	public static void main(String[] args) {
+		lists = new Lists();
+		new Accueil();
+	}
+	
+	public static Lists getbList() {
+		return lists;
+	}
 }

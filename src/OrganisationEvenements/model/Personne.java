@@ -1,4 +1,5 @@
 package OrganisationEvenements.model;
+
 public abstract class Personne {
 
 	private String nom;

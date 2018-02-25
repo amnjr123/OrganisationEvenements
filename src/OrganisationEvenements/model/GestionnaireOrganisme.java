@@ -1,28 +1,33 @@
 package OrganisationEvenements.model;
+
 import java.util.*;
 
 public class GestionnaireOrganisme extends Personne {
 
-	public Collection<Evenement> evenement;
-	public Collection<Salle> salle;
+	public ArrayList<Evenement> evenement;
+	public ArrayList<Salle> salle;
 
 	public GestionnaireOrganisme(String nom, String prenom, String login, String mdp) {
 		super(nom, prenom, login, mdp);
 	}
 
-	public Collection<Evenement> getEvenement() {
+	public GestionnaireOrganisme() {
+		super("", "", "", "");
+	}
+
+	public ArrayList<Evenement> getEvenement() {
 		if (evenement == null)
-			evenement = new HashSet<Evenement>();
+			evenement = new ArrayList<Evenement>();
 		return evenement;
 	}
 
 	public Iterator<Evenement> getIteratorEvenement() {
 		if (evenement == null)
-			evenement = new HashSet<Evenement>();
+			evenement = new ArrayList<Evenement>();
 		return evenement.iterator();
 	}
 
-	public void setEvenement(Collection<Evenement> newEvenement) {
+	public void setEvenement(ArrayList<Evenement> newEvenement) {
 		removeAllEvenement();
 		for (Iterator<Evenement> iter = newEvenement.iterator(); iter.hasNext();)
 			addEvenement((Evenement) iter.next());
@@ -32,7 +37,7 @@ public class GestionnaireOrganisme extends Personne {
 		if (newEvenement == null)
 			return;
 		if (this.evenement == null)
-			this.evenement = new HashSet<Evenement>();
+			this.evenement = new ArrayList<Evenement>();
 		if (!this.evenement.contains(newEvenement))
 			this.evenement.add(newEvenement);
 	}
@@ -50,19 +55,19 @@ public class GestionnaireOrganisme extends Personne {
 			evenement.clear();
 	}
 
-	public Collection<Salle> getSalle() {
+	public ArrayList<Salle> getSalle() {
 		if (salle == null)
-			salle = new HashSet<Salle>();
+			salle = new ArrayList<Salle>();
 		return salle;
 	}
 
 	public Iterator<Salle> getIteratorSalle() {
 		if (salle == null)
-			salle = new java.util.HashSet<Salle>();
+			salle = new ArrayList<Salle>();
 		return salle.iterator();
 	}
 
-	public void setSalle(Collection<Salle> newSalle) {
+	public void setSalle(ArrayList<Salle> newSalle) {
 		removeAllSalle();
 		for (Iterator<Salle> iter = newSalle.iterator(); iter.hasNext();)
 			addSalle((Salle) iter.next());
@@ -72,7 +77,7 @@ public class GestionnaireOrganisme extends Personne {
 		if (newSalle == null)
 			return;
 		if (this.salle == null)
-			this.salle = new java.util.HashSet<Salle>();
+			this.salle = new ArrayList<Salle>();
 		if (!this.salle.contains(newSalle))
 			this.salle.add(newSalle);
 	}

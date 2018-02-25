@@ -1,10 +1,21 @@
 package OrganisationEvenements.model;
+
+import java.util.ArrayList;
+
 public class Organisateur extends Personne {
 
 	private String adresse;
 	private String tel;
 	private String email;
-	public Evenement[] evenement;
+	public ArrayList<Evenement> evenement;
+
+	public Organisateur() {
+		super("", "", "", "");
+		this.tel = "";
+		this.email = "";
+		evenement = new ArrayList<Evenement>();
+
+	}
 
 	public Organisateur(String nom, String prenom, String login, String mdp, String tel, String email) {
 		super(nom, prenom, login, mdp);
@@ -39,4 +50,9 @@ public class Organisateur extends Personne {
 	public void setEmail(String email) {
 		this.email = email;
 	}
+
+	public ArrayList<Evenement> getEvenement() {
+		return evenement;
+	}
+
 }
