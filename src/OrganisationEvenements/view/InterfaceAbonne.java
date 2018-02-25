@@ -34,14 +34,15 @@ public class InterfaceAbonne extends JFrame {
     private JTextField tTel = new JTextField();
     private JTextField tEmail = new JTextField();
     private JTextArea tAddress = new JTextArea();
-    private JButton bModifier = new JButton("Modifier");
+    private JButton bModifier = new JButton();
     private JButton bSuppr = new JButton("Supprimer");
     private JButton bAccueil = new JButton("Accueil");
     private JPanel pForm = new JPanel();
     private JPanel pMenu = new JPanel();
     private JPanel pButtons = new JPanel();
 
-    public InterfaceAbonne(Abonne a) {
+    public InterfaceAbonne(Abonne a, char nature) {
+        this.setNatureOperation(a, nature);
         this.design(a);
     }
 
@@ -54,7 +55,6 @@ public class InterfaceAbonne extends JFrame {
         pPrincp.setLayout(new BorderLayout());
         pPrincp.add(pMenu, BorderLayout.NORTH);
         pMenu.add(bAccueil);
-        Dimension d = new Dimension(140, 20);
         pPrincp.add(pForm, BorderLayout.CENTER);
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
         GroupLayout formLayoutMgr = new GroupLayout(pForm);
@@ -62,11 +62,14 @@ public class InterfaceAbonne extends JFrame {
         pForm.setLayout(formLayoutMgr);
         tAddress.setBorder(tEmail.getBorder());
 
-        pForm.setLayout(formLayoutMgr);;
+        pForm.setLayout(formLayoutMgr);
 
         tAddress.setBorder(tEmail.getBorder());
+        pPrincp.add(pButtons, BorderLayout.SOUTH);
+        pButtons.add(bModifier);
+        pButtons.add(bSuppr);
 
-        
+        //Layout manager du formulaire
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
         GroupLayout.SequentialGroup hGroup = formLayoutMgr.createSequentialGroup();
@@ -95,7 +98,7 @@ public class InterfaceAbonne extends JFrame {
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
                 addComponent(lEmail).addComponent(tEmail));
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
-                addComponent(lLogin).addComponent(tLogin));        
+                addComponent(lLogin).addComponent(tLogin));
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
                 addComponent(lPassword).addComponent(tPassword));
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
@@ -110,11 +113,72 @@ public class InterfaceAbonne extends JFrame {
                 addComponent(lAddress).addComponent(tAddress));
         formLayoutMgr.setVerticalGroup(vGroup);
 
-        tLogin.setPreferredSize(new Dimension(140, 20));
-        tLogin.setEditable(false);
-        tLastName.setEditable(false);
-        tFirstName.setEditable(false);
-        /*pForm.add(lLogin);
+        //Fill text areas
+        tLogin.setText(a.getLogin());
+        tPassword.setText(a.getMdp());
+        tLastName.setText(a.getNom());
+        tFirstName.setText(a.getPrenom());
+        tTel.setText(a.getTel());
+        tEmail.setText(a.getEmail());
+        tAddress.setText(a.getAdresse());
+
+        this.setContentPane(pPrincp);
+        this.setLocationRelativeTo(null);
+        this.setVisible(true);
+
+    }
+
+    public void setNatureOperation(Abonne a, char nature) {
+        if (nature == 'm') {
+            bModifier.setText("Enregistrer les modification");
+            tLogin.setEditable(false);
+            tLastName.setEditable(false);
+            tFirstName.setEditable(false);
+            /*bouton action*/
+            bModifier.addActionListener(e -> {
+                a.setTel(tTel.getText());
+                a.setEmail(tEmail.getText());
+                a.setAdresse(tAddress.getText());
+                a.setAdresse(tAddress.getText());
+                a.setAdresse(tAddress.getText());
+                a.setAdresse(tAddress.getText());
+                //this.setVisible(false);
+                //new InterfaceAbonne(a, 'm');
+            });
+            bAccueil.addActionListener(e -> {
+                this.dispose();
+                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+            });
+        } else {
+            /*bouton action*/
+            bModifier.addActionListener(e -> {
+                a.setPrenom(tFirstName.getText());
+                a.setNom(tLastName.getText());
+                a.setLogin(tLogin.getText());
+                a.setMdp(new String(tPassword.getPassword()));
+                a.setTel(tTel.getText());
+                a.setAdresse(tAddress.getText());
+                a.setEmail(tEmail.getText());
+                OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
+                this.dispose();
+                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+                //this.setVisible(false);
+                //new InterfaceAbonne(a, 'm');
+                for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){
+                    System.out.println(o.toString());
+                }
+            });
+            bAccueil.addActionListener(e -> {
+                this.dispose();
+                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+            });
+            bModifier.setText("Valider");
+        }
+
+    }
+}
+
+/*pForm.add(lLogin);
         pForm.add(lPassword);
         pForm.add(lPasswordConfirm);
         
@@ -181,41 +245,4 @@ public class InterfaceAbonne extends JFrame {
         bAccueil.setSize(100, 25);
         //bSuppr.setLocation(260, 310);
         bSuppr.setSize(150, 25);
-         */
-        tLogin.setText(a.getLogin());
-        tPassword.setText(a.getMdp());
-        tLastName.setText(a.getNom());
-        tFirstName.setText(a.getPrenom());
-        tTel.setText(a.getTel());
-        tEmail.setText(a.getEmail());
-        tAddress.setText(a.getAdresse());
-        //tAddress.setBorder();
-
-        //pPrincp.add(bModifier);pPrincp.add(bSuppr);pPrincp.add(bAccueil);
-        //this.add(pPrincp, BorderLayout.CENTER);
-        pPrincp.add(pButtons, BorderLayout.SOUTH);
-        pButtons.add(bModifier);
-        pButtons.add(bSuppr);
-
-        /*bouton action*/
-        bModifier.addActionListener(e -> {
-            a.setTel(tTel.getText());
-            a.setEmail(tEmail.getText());
-            a.setAdresse(tAddress.getText());
-            a.setAdresse(tAddress.getText());
-            a.setAdresse(tAddress.getText());
-            a.setAdresse(tAddress.getText());
-            this.setVisible(false);
-            new InterfaceAbonne(a);
-            //Accueil.lists.getAbonneList().set(Accueil.lists.getAbonneList().indexOf(a), );		
-        });
-        bAccueil.addActionListener(e -> {
-            this.setVisible(false);
-            new Accueil();
-        });
-        this.setContentPane(pPrincp);
-        this.setLocationRelativeTo(null);
-        this.setVisible(true);
-        //this.pack();
-    }
-}
+ */
