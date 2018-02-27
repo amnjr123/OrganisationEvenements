@@ -139,7 +139,6 @@ public class InterfaceAbonne extends JFrame {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
             bModifier.setText("Enregistrer les modification");
-            bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
             tFirstName.setEditable(false);
@@ -147,9 +146,6 @@ public class InterfaceAbonne extends JFrame {
             bModifier.addActionListener(e -> {
                 a.setTel(tTel.getText());
                 a.setEmail(tEmail.getText());
-                a.setAdresse(tAddress.getText());
-                a.setAdresse(tAddress.getText());
-                a.setAdresse(tAddress.getText());
                 a.setAdresse(tAddress.getText());
                 //this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
