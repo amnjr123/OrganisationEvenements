@@ -130,8 +130,7 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
-        	//tabbedPaneModif.add("Modifier votre compte", pPrincp); not working
-            bModifier.setText("Enregistrer les modification");
+        	bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
             tFirstName.setEditable(false);
@@ -146,11 +145,9 @@ public class InterfaceAbonne extends JFrame {
                 //this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
             });
-            bAccueil.addActionListener(e -> {
-                this.dispose();
-                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
-            });
         } else {
+        	// cacher le button supp
+        	bSuppr.setVisible(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
                 a.setPrenom(tFirstName.getText());
@@ -170,13 +167,12 @@ public class InterfaceAbonne extends JFrame {
                     System.out.println(o.toString());
                 }*/
             });
-            bAccueil.addActionListener(e -> {
-                this.dispose();
-                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
-            });
             bModifier.setText("Valider");
         }
-
+        bAccueil.addActionListener(e -> {
+            this.dispose();
+            OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+        });
     }
 }
 
