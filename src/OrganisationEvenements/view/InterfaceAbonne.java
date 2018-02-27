@@ -134,8 +134,6 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
-        	bModifier.setText("Enregistrer les modification");
-            tPPrincipal.add("Donnees abonne", pPrincp);
             bModifier.setText("Enregistrer les modification");
             tPPrincipal.add("Donnees abonne", pModification);
 
