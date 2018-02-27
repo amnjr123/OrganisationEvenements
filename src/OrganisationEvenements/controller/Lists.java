@@ -20,6 +20,15 @@ public class Lists {
 		evt = new ArrayList<Evenement>();
 	}
 
+	public Abonne getAbonne(String login) {
+		Abonne a = new Abonne();
+		for(Abonne ab : abonneList){
+			if(ab.getLogin()==login)
+				a=ab;
+		}
+		return a;
+	}
+	
 	public void remplirListEvtTest() {
 		Salle salle1 = new Salle("9ism ra9m 8", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
 		abonneList.add(new Abonne("BOUDYACH", "Anas", "1", "1", "0614845937", "anas.boudyach@gmail.com",

@@ -91,8 +91,19 @@ public class InterfaceAbonne extends JFrame {
 
         tPassword.getDocument().addDocumentListener(documentListenerPasswordCofirm);
         tPasswordConfirm.getDocument().addDocumentListener(documentListenerPasswordCofirm);
-
-        
+        //Delete Button
+        bSuppr.addActionListener(e->{
+        	String mdp =  JOptionPane.showInputDialog(this,"Veuillez Rentrer votre pass actuel" ,JOptionPane.YES_NO_OPTION);
+    		if(OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)){
+        		int dialogResult = JOptionPane.showConfirmDialog (null, "Vous êtes sur de vouloir supprimer ce compte?","Warning",JOptionPane.YES_NO_OPTION);
+            	if(dialogResult == JOptionPane.YES_OPTION){
+               	 	OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().remove(a);
+                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+               	 	this.dispose(); 
+            	}
+    		}else
+    			JOptionPane.showMessageDialog(this, " I am asking for your pass !!");
+    	});
         //Layout manager du formulaire
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal

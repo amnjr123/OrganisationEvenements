@@ -1,4 +1,5 @@
 package OrganisationEvenements.model;
+
 import java.util.*;
 
 public class Abonne extends Personne {
@@ -7,13 +8,14 @@ public class Abonne extends Personne {
 	private String adresse;
 	public ArrayList<Evenement> evenement;
 
-	public Abonne(){
-		super("","","","");
+	public Abonne() {
+		super("", "", "", "");
 		this.tel = "";
 		this.email = "";
 		this.adresse = "";
 		evenement = new ArrayList<Evenement>();
 	}
+
 	public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse) {
 		super(nom, prenom, login, mdp);
 		this.tel = tel;
@@ -21,6 +23,8 @@ public class Abonne extends Personne {
 		this.adresse = adresse;
 		evenement = new ArrayList<Evenement>();
 	}
+
+	
 
 	public String toString() {
 		return super.toString() + "\nAdresse :" + adresse + "\ntel :" + tel + "\nEmail :" + email;
@@ -55,8 +59,6 @@ public class Abonne extends Personne {
 			evenement = new ArrayList<Evenement>();
 		return evenement;
 	}
-
-	
 
 	public void setEvenement(ArrayList<Evenement> newEvenement) {
 		removeAllEvenement();
