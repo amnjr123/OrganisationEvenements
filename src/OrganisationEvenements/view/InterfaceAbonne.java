@@ -1,13 +1,13 @@
 package OrganisationEvenements.view;
 
 import java.awt.BorderLayout;
-import java.awt.Color;
 import java.awt.FlowLayout;
 import java.awt.Rectangle;
 
 import javax.swing.*;
 
 import OrganisationEvenements.model.Abonne;
+import java.awt.Color;
 import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.Border;
@@ -15,10 +15,9 @@ import javax.swing.border.EmptyBorder;
 
 public class InterfaceAbonne extends JFrame {
 
-    private JPanel pPrincp = new JPanel();
-    private JTabbedPane tPPrincipal = new JTabbedPane();    
-    private JTabbedPane tabbedPaneModif = new JTabbedPane();
-    private JTabbedPane tabbedPaneEvent = new JTabbedPane();
+    private JPanel pPrincipal = new JPanel();
+    private JPanel pModification = new JPanel();
+    private JTabbedPane tPPrincipal = new JTabbedPane();
     private JLabel lLogin = new JLabel("Login : ");
     private JLabel lPassword = new JLabel("Mot de passe : ");
     private JLabel lPasswordConfirm = new JLabel("Confirmez le mot de passe : ");
@@ -54,10 +53,8 @@ public class InterfaceAbonne extends JFrame {
         this.setBounds(new Rectangle(0, 0, 900, 500));
         this.setLayout(new FlowLayout());
 
-        pPrincp.setLayout(new BorderLayout());
-        pPrincp.add(pMenu, BorderLayout.NORTH);
-        pMenu.add(bAccueil);
-        pPrincp.add(pForm, BorderLayout.CENTER);
+        pModification.setLayout(new BorderLayout());
+        pModification.add(pForm, BorderLayout.CENTER);
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
         GroupLayout formLayoutMgr = new GroupLayout(pForm);
 
@@ -67,7 +64,7 @@ public class InterfaceAbonne extends JFrame {
         pForm.setLayout(formLayoutMgr);
 
         tAddress.setBorder(tEmail.getBorder());
-        pPrincp.add(pButtons, BorderLayout.SOUTH);
+        pModification.add(pButtons, BorderLayout.SOUTH);
         pButtons.add(bModifier);
         pButtons.add(bSuppr);
 
@@ -124,7 +121,12 @@ public class InterfaceAbonne extends JFrame {
         tEmail.setText(a.getEmail());
         tAddress.setText(a.getAdresse());
 
-        this.setContentPane(tPPrincipal);
+        this.setContentPane(pPrincipal);
+        pPrincipal.setLayout(new BorderLayout());
+        pPrincipal.add(tPPrincipal, BorderLayout.CENTER);
+        pPrincipal.add(pMenu, BorderLayout.NORTH);
+        pMenu.setBackground(Color.darkGray);
+        pMenu.add(bAccueil);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -132,14 +134,10 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
-<<<<<<< HEAD
-        	bModifier.setText("Enregistrer les modification");
-=======
-            tPPrincipal.add("Donnees abonne", pPrincp);
-            tPPrincipal.add("Mes reservations", pReservation);
-            //tabbedPaneModif.add("Modifier votre compte", pPrincp);
             bModifier.setText("Enregistrer les modification");
->>>>>>> 86373a0456bfd50f065a90d968d4bc9ac5caa027
+            tPPrincipal.add("Donnees abonne", pModification);
+            tPPrincipal.add("Mes reservations", pReservation);
+            bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
             tFirstName.setEditable(false);
@@ -155,8 +153,8 @@ public class InterfaceAbonne extends JFrame {
                 //new InterfaceAbonne(a, 'm');
             });
         } else {
-        	// cacher le button supp
-        	bSuppr.setVisible(false);
+            // cacher le button supp
+            bSuppr.setVisible(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
                 a.setPrenom(tFirstName.getText());
@@ -167,12 +165,12 @@ public class InterfaceAbonne extends JFrame {
                 a.setAdresse(tAddress.getText());
                 a.setEmail(tEmail.getText());
                 OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
-                
+
                 OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne('m');
                 this.dispose();
                 //this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
-               /* for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){
+                /* for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){
                     System.out.println(o.toString());
                 }*/
             });
