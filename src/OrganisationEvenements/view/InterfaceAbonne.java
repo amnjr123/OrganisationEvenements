@@ -157,7 +157,8 @@ public class InterfaceAbonne extends JFrame {
 
     }
 
-    public void verif(){
+    public boolean verif(){
+    	boolean t = false;
     	String pw = new String(tPassword.getPassword());
     	String pwc = new String(tPasswordConfirm.getPassword());
     	if (!pw.equals(pwc)){
@@ -166,7 +167,9 @@ public class InterfaceAbonne extends JFrame {
     	} else {
     		tPassword.setBackground(Color.GREEN);
     		tPasswordConfirm.setBackground(Color.green);
+    		t=true;
     	}
+    	return t;
     }
     
     public void setNatureOperation(Abonne a, char nature) {
@@ -178,11 +181,12 @@ public class InterfaceAbonne extends JFrame {
             tFirstName.setEditable(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
-            	
-                a.setTel(tTel.getText());
-                a.setEmail(tEmail.getText());
-                a.setAdresse(tAddress.getText());
-                //this.setVisible(false);
+            	if(verif()){
+                    a.setTel(tTel.getText());
+                    a.setEmail(tEmail.getText());
+                    a.setAdresse(tAddress.getText());
+                    a.setMdp(new String(tPassword.getPassword()));
+            	}//this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
             });
         } else {
@@ -190,16 +194,19 @@ public class InterfaceAbonne extends JFrame {
             bSuppr.setVisible(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
-                a.setPrenom(tFirstName.getText());
-                a.setNom(tLastName.getText());
-                a.setLogin(tLogin.getText());
-                a.setMdp(new String(tPassword.getPassword()));
-                a.setTel(tTel.getText());
-                a.setAdresse(tAddress.getText());
-                a.setEmail(tEmail.getText());
-                OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
-                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(),a.getMdp(),'m');
-                this.dispose();
+            	if(verif()){
+                    a.setPrenom(tFirstName.getText());
+                    a.setNom(tLastName.getText());
+                    a.setLogin(tLogin.getText());
+                    a.setMdp(new String(tPassword.getPassword()));
+                    a.setTel(tTel.getText());
+                    a.setAdresse(tAddress.getText());
+                    a.setEmail(tEmail.getText());
+                    OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
+                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(),a.getMdp(),'m');
+                    this.dispose();
+   
+            	}
                 //this.setVisible(false);
                 //new InterfaceAbonne(a, 'm');
                 /* for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){
