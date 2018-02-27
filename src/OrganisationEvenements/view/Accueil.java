@@ -52,7 +52,7 @@ public class Accueil extends JFrame {
 		/* JDK 8 Notation */
 		bAcces.addActionListener(e -> {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				afficherInterfaceAbonne('m');
+				afficherInterfaceAbonne(null,null,'m');
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
 				afficherInterfaceOrganisateur('m');
 			} else {
@@ -61,7 +61,7 @@ public class Accueil extends JFrame {
 		});
 		bCreation.addActionListener(e -> {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				afficherInterfaceAbonne('c');
+				afficherInterfaceAbonne(null,null,'c');
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
 				afficherInterfaceOrganisateur('c');
 			} else {
@@ -165,13 +165,17 @@ public class Accueil extends JFrame {
 		return logininformation;
 	}
 
-	public Abonne afficherInterfaceAbonne(char nature) {
+	public Abonne afficherInterfaceAbonne(String login, String password, char nature) {
 		boolean exist = false;
 		Abonne ab = new Abonne();
 		if (nature == 'm') {
-			Hashtable<String, String> t = login();
+                if ((login == null)&&(password == null)){
+                    Hashtable<String, String> t = login();
+                    login = t.get("login");
+                    password=t.get("password");
+                }			
 			for (Abonne a : OrganisationEvenements.getLists().getAbonneList()) {
-				if (t.get("login").equals(a.getLogin()) && t.get("password").equals(a.getMdp())) {
+				if (login.equals(a.getLogin()) && password.equals(a.getMdp())) {
 					exist = true;
 					ab = a;
 					this.setVisible(false);
