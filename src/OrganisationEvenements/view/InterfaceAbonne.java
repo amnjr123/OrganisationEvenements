@@ -186,8 +186,7 @@ public class InterfaceAbonne extends JFrame {
                     a.setEmail(tEmail.getText());
                     a.setAdresse(tAddress.getText());
                     a.setMdp(new String(tPassword.getPassword()));
-            	}//this.setVisible(false);
-                //new InterfaceAbonne(a, 'm');
+            	}
             });
         } else {
             // cacher le button supp
@@ -205,13 +204,7 @@ public class InterfaceAbonne extends JFrame {
                     OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
                     OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(),a.getMdp(),'m');
                     this.dispose();
-   
             	}
-                //this.setVisible(false);
-                //new InterfaceAbonne(a, 'm');
-                /* for(Abonne o : OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList() ){
-                    System.out.println(o.toString());
-                }*/
             });
             bModifier.setText("Valider");
         }
