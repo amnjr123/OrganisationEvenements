@@ -54,7 +54,7 @@ public class InterfaceAbonne extends JFrame {
         this.setLayout(new FlowLayout());
 
         tPPrincipal.add("Donnees abonne", pModification);
-        tPPrincipal.add("Mes reservations", pReservation);
+
 
         pModification.setLayout(new BorderLayout());
         pModification.add(pForm, BorderLayout.CENTER);
@@ -137,6 +137,7 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
+            tPPrincipal.add("Mes reservations", pReservation);
             bModifier.setText("Enregistrer les modification");
             bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
