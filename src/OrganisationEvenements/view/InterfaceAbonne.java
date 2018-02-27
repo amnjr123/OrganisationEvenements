@@ -132,14 +132,11 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
-<<<<<<< HEAD
         	bModifier.setText("Enregistrer les modification");
-=======
             tPPrincipal.add("Donnees abonne", pPrincp);
             tPPrincipal.add("Mes reservations", pReservation);
             //tabbedPaneModif.add("Modifier votre compte", pPrincp);
             bModifier.setText("Enregistrer les modification");
->>>>>>> 86373a0456bfd50f065a90d968d4bc9ac5caa027
             tLogin.setEditable(false);
             tLastName.setEditable(false);
             tFirstName.setEditable(false);
