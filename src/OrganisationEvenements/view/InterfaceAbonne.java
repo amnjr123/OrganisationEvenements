@@ -16,6 +16,7 @@ import javax.swing.border.EmptyBorder;
 public class InterfaceAbonne extends JFrame {
 
     private JPanel pPrincp = new JPanel();
+    private JTabbedPane tPPrincipal = new JTabbedPane();    
     private JTabbedPane tabbedPaneModif = new JTabbedPane();
     private JTabbedPane tabbedPaneEvent = new JTabbedPane();
     private JLabel lLogin = new JLabel("Login : ");
@@ -40,6 +41,7 @@ public class InterfaceAbonne extends JFrame {
     private JPanel pForm = new JPanel();
     private JPanel pMenu = new JPanel();
     private JPanel pButtons = new JPanel();
+    private JPanel pReservation = new JPanel();
 
     public InterfaceAbonne(Abonne a, char nature) {
         this.setNatureOperation(a, nature);
@@ -122,7 +124,7 @@ public class InterfaceAbonne extends JFrame {
         tEmail.setText(a.getEmail());
         tAddress.setText(a.getAdresse());
 
-        this.setContentPane(pPrincp);
+        this.setContentPane(tPPrincipal);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
 
@@ -130,7 +132,9 @@ public class InterfaceAbonne extends JFrame {
 
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
-        	//tabbedPaneModif.add("Modifier votre compte", pPrincp); not working
+            tPPrincipal.add("Donnees abonne", pPrincp);
+            tPPrincipal.add("Mes reservations", pReservation);
+            //tabbedPaneModif.add("Modifier votre compte", pPrincp);
             bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
