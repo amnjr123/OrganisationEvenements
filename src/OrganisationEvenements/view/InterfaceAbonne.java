@@ -12,6 +12,8 @@ import java.awt.Dimension;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
+import javax.swing.event.DocumentEvent;
+import javax.swing.event.DocumentListener;
 
 public class InterfaceAbonne extends JFrame {
 
@@ -71,6 +73,26 @@ public class InterfaceAbonne extends JFrame {
         pButtons.add(bModifier);
         pButtons.add(bSuppr);
 
+        //CONFIRM PASSWORD
+        DocumentListener documentListenerPasswordCofirm = new DocumentListener() {
+			@Override
+			public void changedUpdate(DocumentEvent arg0) {
+				verif();
+			}
+			@Override
+			public void insertUpdate(DocumentEvent arg0) {
+				verif();
+			}
+			@Override
+			public void removeUpdate(DocumentEvent arg0) {
+				verif();
+			}
+        };
+
+        tPassword.getDocument().addDocumentListener(documentListenerPasswordCofirm);
+        tPasswordConfirm.getDocument().addDocumentListener(documentListenerPasswordCofirm);
+
+        
         //Layout manager du formulaire
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
@@ -135,6 +157,18 @@ public class InterfaceAbonne extends JFrame {
 
     }
 
+    public void verif(){
+    	String pw = new String(tPassword.getPassword());
+    	String pwc = new String(tPasswordConfirm.getPassword());
+    	if (!pw.equals(pwc)){
+    		tPassword.setBackground(Color.red);
+    		tPasswordConfirm.setBackground(Color.red);
+    	} else {
+    		tPassword.setBackground(Color.GREEN);
+    		tPasswordConfirm.setBackground(Color.green);
+    	}
+    }
+    
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
@@ -144,6 +178,7 @@ public class InterfaceAbonne extends JFrame {
             tFirstName.setEditable(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
+            	
                 a.setTel(tTel.getText());
                 a.setEmail(tEmail.getText());
                 a.setAdresse(tAddress.getText());
@@ -163,7 +198,6 @@ public class InterfaceAbonne extends JFrame {
                 a.setAdresse(tAddress.getText());
                 a.setEmail(tEmail.getText());
                 OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
-
                 OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(),a.getMdp(),'m');
                 this.dispose();
                 //this.setVisible(false);
@@ -178,6 +212,7 @@ public class InterfaceAbonne extends JFrame {
             this.dispose();
             OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
         });
+        
     }
 }
 
