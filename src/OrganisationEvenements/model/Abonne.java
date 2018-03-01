@@ -10,6 +10,7 @@ public class Abonne extends Personne {
     private String ville;
     private String region;
     private ArrayList<Evenement> evenement;
+    
 
     public void setVille(String ville) {
         this.ville = ville;

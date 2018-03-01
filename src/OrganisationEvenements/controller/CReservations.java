@@ -84,7 +84,7 @@ public class CReservations {
             }
             i++;
         }
-        return null;
+        return dtmEvt;
     }
 
     public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {

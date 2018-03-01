@@ -5,6 +5,7 @@ import java.awt.FlowLayout;
 import java.awt.Rectangle;
 
 import javax.swing.*;
+import OrganisationEvenements.controller.*;
 
 import OrganisationEvenements.model.Abonne;
 import java.awt.Color;
@@ -47,8 +48,22 @@ public class InterfaceAbonne extends JFrame {
     private JPanel pMenu = new JPanel();
     private JPanel pButtons = new JPanel();
     private JPanel pReservation = new JPanel();
+    private JScrollPane spEvenements = new JScrollPane();
+    private JScrollPane spReservations = new JScrollPane();
+    private JTable tEvenements = new JTable();
+    private JTable tReservations = new JTable();
+    
+    private Abonne abonne;
+    private CReservations controleurReservation;
+
+    public Abonne getAbonne() {
+        return abonne;
+    }
+    
 
     public InterfaceAbonne(Abonne a, char nature) {
+        this.abonne=a;
+        controleurReservation = new CReservations();
         this.setNatureOperation(a, nature);
         this.design(a);
     }
@@ -99,11 +114,11 @@ public class InterfaceAbonne extends JFrame {
         //Delete Button
         bSuppr.addActionListener(e -> {
             String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre pass actuel", JOptionPane.YES_NO_OPTION);
-            if (OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)) {
+            if (OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Vous �tes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
-                    OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().remove(a);
-                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+                    OrganisationEvenements.getLists().getAbonneList().remove(a);
+                    OrganisationEvenements.getFenetreAccueil().setVisible(true);
                     this.dispose();
                 }
             } else {
@@ -202,6 +217,15 @@ public class InterfaceAbonne extends JFrame {
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
+            pReservation.setLayout(new BorderLayout());
+            pReservation.add(spEvenements, BorderLayout.NORTH);
+            pReservation.add(spReservations, BorderLayout.CENTER);
+            spReservations.setViewportView(tReservations);
+            spEvenements.setViewportView(tEvenements);
+            tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
+            tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
+            spEvenements.setPreferredSize(new Dimension(0, 100));
+            
             bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
@@ -235,8 +259,8 @@ public class InterfaceAbonne extends JFrame {
                     a.setVille(tVille.getText());
                     a.setRegion(tRegion.getText());
                     a.setEmail(tEmail.getText());
-                    OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
-                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(), a.getMdp(), 'm');
+                    OrganisationEvenements.getLists().getAbonneList().add(a);
+                    OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(), a.getMdp(), 'm');
                     JOptionPane.showMessageDialog(this, "Compte créé avec succès ! Yala raw3a :D !");
                     this.dispose();
                 } else {
@@ -247,7 +271,7 @@ public class InterfaceAbonne extends JFrame {
         }
         bAccueil.addActionListener(e -> {
             this.dispose();
-            OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
+            OrganisationEvenements.getFenetreAccueil().setVisible(true);
         });
 
     }
