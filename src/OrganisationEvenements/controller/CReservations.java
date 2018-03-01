@@ -37,10 +37,12 @@ public class CReservations {
     }*/
     public void reserverEvenement(Evenement ev, Abonne ab) {
         ab.getEvenement().add(ev);
+        ev.getAbonne().add(ab);
     }
 
     public void annulerReservationEvenement(Evenement ev, Abonne ab) {
         ab.getEvenement().remove(ev);
+        ev.getAbonne().remove(ab);
     }
 
     public DefaultTableModel getDtmListeEvenementsVilleRegionAbonne(Abonne a) {
