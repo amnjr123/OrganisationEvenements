@@ -16,6 +16,7 @@ import javax.swing.table.DefaultTableModel;
 public class CReservations {
 
     Lists lse;
+    DefaultTableModel dtmEvt;
 
     public CReservations() {
         lse = new Lists();
@@ -41,14 +42,45 @@ public class CReservations {
     public void annulerReservationEvenement(Evenement ev, Abonne ab) {
         ab.getEvenement().remove(ev);
     }
-    
-    public DefaultTableModel getDtmListeReservations(Abonne a){
 
-        for (int i : a.getEvenement()){
-            System.out.println(alEvt.get(i).toString());
+    public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {
+        int i = 0;
+        dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
+            /* Non editable */
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // all cells false
+                return false;
+            }
+        };
+
+        a.getEvenement().get(i);
+        while (i < a.getEvenement().size()) {
+            String type = a.getEvenement().get(i).getType();
+            String titre = a.getEvenement().get(i).getTitre();
+            String detailEvenement = a.getEvenement().get(i).getDetailEvenement();
+            String ville = a.getEvenement().get(i).getVilleConcernee();
+            int quota = a.getEvenement().get(i).getQuota();
+            String validation = a.getEvenement().get(i).getValidation();
+            String nomSalle;
+            String villeSalle;
+            String adresseSalle;
+            try {
+                nomSalle = a.getEvenement().get(i).getSalle().getNom();
+                villeSalle = a.getEvenement().get(i).getSalle().getVille();
+                adresseSalle = a.getEvenement().get(i).getSalle().getAdresse();
+            } catch (Exception e) {
+                nomSalle = "Aucune salle n'est affectee";
+                villeSalle = "";
+                adresseSalle = "";
+            }
+            Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
+                adresseSalle};
+            dtmEvt.addRow(data);
+            i++;
         }
 
-        return null;
+        return dtmEvt;
     }
 
 }
