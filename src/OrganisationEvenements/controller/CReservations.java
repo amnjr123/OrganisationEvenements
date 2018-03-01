@@ -17,9 +17,10 @@ public class CReservations {
 
     Lists lse;
     DefaultTableModel dtmEvt;
+    DefaultTableModel dtmEvtRes;
 
     public CReservations() {
-        lse = new Lists();
+        lse = OrganisationEvenements.getLists();
     }
 
     public void EvenementsParVille() {
@@ -58,7 +59,7 @@ public class CReservations {
         String villeAbonne = a.getVille();
         String regionAbonne = a.getRegion();
         while (i < a.getEvenement().size()) {
-            if (villeAbonne.equalsIgnoreCase(a.getEvenement().get(i).getVilleConcernee())) {
+            if (a.getVille().equalsIgnoreCase(lse.getEvt().get(i).getVilleConcernee())) {
 
                 String type = a.getEvenement().get(i).getType();
                 String titre = a.getEvenement().get(i).getTitre();
@@ -78,8 +79,7 @@ public class CReservations {
                     villeSalle = "";
                     adresseSalle = "";
                 }
-                Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
-                    adresseSalle};
+                Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,adresseSalle};
                 dtmEvt.addRow(data);
             }
             i++;
@@ -89,7 +89,7 @@ public class CReservations {
 
     public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {
         int i = 0;
-        dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
+        dtmEvtRes = new DefaultTableModel(lse.getEntetesEvt(), 0) {
             /* Non editable */
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -119,11 +119,11 @@ public class CReservations {
             }
             Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
                 adresseSalle};
-            dtmEvt.addRow(data);
+            dtmEvtRes.addRow(data);
             i++;
         }
 
-        return dtmEvt;
+        return dtmEvtRes;
     }
 
 }
