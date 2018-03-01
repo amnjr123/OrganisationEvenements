@@ -55,8 +55,33 @@ public class CReservations {
         };
         String villeAbonne = a.getVille();
         String regionAbonne = a.getRegion();
-        
+        while (i < a.getEvenement().size()) {
+            if (villeAbonne.equalsIgnoreCase(a.getEvenement().get(i).getVilleConcernee())) {
 
+                String type = a.getEvenement().get(i).getType();
+                String titre = a.getEvenement().get(i).getTitre();
+                String detailEvenement = a.getEvenement().get(i).getDetailEvenement();
+                String ville = a.getEvenement().get(i).getVilleConcernee();
+                int quota = a.getEvenement().get(i).getQuota();
+                String validation = a.getEvenement().get(i).getValidation();
+                String nomSalle;
+                String villeSalle;
+                String adresseSalle;
+                try {
+                    nomSalle = a.getEvenement().get(i).getSalle().getNom();
+                    villeSalle = a.getEvenement().get(i).getSalle().getVille();
+                    adresseSalle = a.getEvenement().get(i).getSalle().getAdresse();
+                } catch (Exception e) {
+                    nomSalle = "Aucune salle n'est affectee";
+                    villeSalle = "";
+                    adresseSalle = "";
+                }
+                Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
+                    adresseSalle};
+                dtmEvt.addRow(data);
+            }
+            i++;
+        }
         return null;
     }
 
@@ -71,7 +96,6 @@ public class CReservations {
             }
         };
 
-        a.getEvenement().get(i);
         while (i < a.getEvenement().size()) {
             String type = a.getEvenement().get(i).getType();
             String titre = a.getEvenement().get(i).getTitre();
