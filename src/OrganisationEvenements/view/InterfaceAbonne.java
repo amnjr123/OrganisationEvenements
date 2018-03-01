@@ -215,6 +215,9 @@ public class InterfaceAbonne extends JFrame {
                     a.setVille(tVille.getText());
                     a.setRegion(tRegion.getText());
                     a.setMdp(new String(tPassword.getPassword()));
+                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
+                } else {
+                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
                 }
             });
         } else {
@@ -234,7 +237,10 @@ public class InterfaceAbonne extends JFrame {
                     a.setEmail(tEmail.getText());
                     OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
                     OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(), a.getMdp(), 'm');
+                    JOptionPane.showMessageDialog(this, "Compte créé avec succès ! Yala raw3a :D !");
                     this.dispose();
+                } else {
+                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
                 }
             });
             bModifier.setText("Valider");
