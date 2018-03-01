@@ -36,6 +36,10 @@ public class InterfaceAbonne extends JFrame {
     private JTextField tTel = new JTextField();
     private JTextField tEmail = new JTextField();
     private JTextArea tAddress = new JTextArea();
+    private JTextField tVille = new JTextField();
+    private JTextField tRegion = new JTextField();
+    private JLabel lVille = new JLabel("Ville");
+    private JLabel lRegion = new JLabel("Region");
     private JButton bModifier = new JButton();
     private JButton bSuppr = new JButton("Supprimer");
     private JButton bAccueil = new JButton("Accueil");
@@ -57,7 +61,6 @@ public class InterfaceAbonne extends JFrame {
 
         tPPrincipal.add("Donnees abonne", pModification);
 
-
         pModification.setLayout(new BorderLayout());
         pModification.add(pForm, BorderLayout.CENTER);
         pForm.setBorder(new EmptyBorder(0, 100, 0, 100));
@@ -75,35 +78,38 @@ public class InterfaceAbonne extends JFrame {
 
         //CONFIRM PASSWORD
         DocumentListener documentListenerPasswordCofirm = new DocumentListener() {
-			@Override
-			public void changedUpdate(DocumentEvent arg0) {
-				verif();
-			}
-			@Override
-			public void insertUpdate(DocumentEvent arg0) {
-				verif();
-			}
-			@Override
-			public void removeUpdate(DocumentEvent arg0) {
-				verif();
-			}
+            @Override
+            public void changedUpdate(DocumentEvent arg0) {
+                verif();
+            }
+
+            @Override
+            public void insertUpdate(DocumentEvent arg0) {
+                verif();
+            }
+
+            @Override
+            public void removeUpdate(DocumentEvent arg0) {
+                verif();
+            }
         };
 
         tPassword.getDocument().addDocumentListener(documentListenerPasswordCofirm);
         tPasswordConfirm.getDocument().addDocumentListener(documentListenerPasswordCofirm);
         //Delete Button
-        bSuppr.addActionListener(e->{
-        	String mdp =  JOptionPane.showInputDialog(this,"Veuillez Rentrer votre pass actuel" ,JOptionPane.YES_NO_OPTION);
-    		if(OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)){
-        		int dialogResult = JOptionPane.showConfirmDialog (null, "Vous êtes sur de vouloir supprimer ce compte?","Warning",JOptionPane.YES_NO_OPTION);
-            	if(dialogResult == JOptionPane.YES_OPTION){
-               	 	OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().remove(a);
+        bSuppr.addActionListener(e -> {
+            String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre pass actuel", JOptionPane.YES_NO_OPTION);
+            if (OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Vous ï¿½tes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
+                if (dialogResult == JOptionPane.YES_OPTION) {
+                    OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().remove(a);
                     OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
-               	 	this.dispose(); 
-            	}
-    		}else
-    			JOptionPane.showMessageDialog(this, " I am asking for your pass !!");
-    	});
+                    this.dispose();
+                }
+            } else {
+                JOptionPane.showMessageDialog(this, " I am asking for your pass !!");
+            }
+        });
         //Layout manager du formulaire
         formLayoutMgr.setAutoCreateGaps(true);
         //Groupe sequentiel horizontal
@@ -116,7 +122,9 @@ public class InterfaceAbonne extends JFrame {
                 addComponent(lLastName).
                 addComponent(lFirstName).
                 addComponent(lTel).
-                addComponent(lAddress));
+                addComponent(lAddress).
+                addComponent(lVille).
+                addComponent(lRegion));
         hGroup.addGroup(formLayoutMgr.createParallelGroup().
                 addComponent(tEmail).
                 addComponent(tLogin).
@@ -125,7 +133,9 @@ public class InterfaceAbonne extends JFrame {
                 addComponent(tLastName).
                 addComponent(tFirstName).
                 addComponent(tTel).
-                addComponent(tAddress));
+                addComponent(tAddress).
+                addComponent(tVille).
+                addComponent(tRegion));
         formLayoutMgr.setHorizontalGroup(hGroup);
 
         //Groupe sequentiel Vertical
@@ -146,6 +156,10 @@ public class InterfaceAbonne extends JFrame {
                 addComponent(lTel).addComponent(tTel));
         vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
                 addComponent(lAddress).addComponent(tAddress));
+        vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
+                addComponent(lVille).addComponent(tVille));
+        vGroup.addGroup(formLayoutMgr.createParallelGroup(Alignment.BASELINE).
+                addComponent(lRegion).addComponent(tRegion));
         formLayoutMgr.setVerticalGroup(vGroup);
 
         //Fill text areas
@@ -156,6 +170,8 @@ public class InterfaceAbonne extends JFrame {
         tTel.setText(a.getTel());
         tEmail.setText(a.getEmail());
         tAddress.setText(a.getAdresse());
+        tVille.setText(a.getVille());
+        tRegion.setText(a.getRegion());
 
         this.setContentPane(pPrincipal);
         pPrincipal.setLayout(new BorderLayout());
@@ -168,21 +184,21 @@ public class InterfaceAbonne extends JFrame {
 
     }
 
-    public boolean verif(){
-    	boolean t = false;
-    	String pw = new String(tPassword.getPassword());
-    	String pwc = new String(tPasswordConfirm.getPassword());
-    	if (!pw.equals(pwc)){
-    		tPassword.setBackground(Color.red);
-    		tPasswordConfirm.setBackground(Color.red);
-    	} else {
-    		tPassword.setBackground(Color.GREEN);
-    		tPasswordConfirm.setBackground(Color.green);
-    		t=true;
-    	}
-    	return t;
+    public boolean verif() {
+        boolean t = false;
+        String pw = new String(tPassword.getPassword());
+        String pwc = new String(tPasswordConfirm.getPassword());
+        if (!pw.equals(pwc)) {
+            tPassword.setBackground(Color.red);
+            tPasswordConfirm.setBackground(Color.red);
+        } else {
+            tPassword.setBackground(Color.GREEN);
+            tPasswordConfirm.setBackground(Color.green);
+            t = true;
+        }
+        return t;
     }
-    
+
     public void setNatureOperation(Abonne a, char nature) {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
@@ -192,30 +208,34 @@ public class InterfaceAbonne extends JFrame {
             tFirstName.setEditable(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
-            	if(verif()){
+                if (verif()) {
                     a.setTel(tTel.getText());
                     a.setEmail(tEmail.getText());
                     a.setAdresse(tAddress.getText());
+                    a.setVille(tVille.getText());
+                    a.setRegion(tRegion.getText());
                     a.setMdp(new String(tPassword.getPassword()));
-            	}
+                }
             });
         } else {
             // cacher le button supp
             bSuppr.setVisible(false);
             /*bouton action*/
             bModifier.addActionListener(e -> {
-            	if(verif()){
+                if (verif()) {
                     a.setPrenom(tFirstName.getText());
                     a.setNom(tLastName.getText());
                     a.setLogin(tLogin.getText());
                     a.setMdp(new String(tPassword.getPassword()));
                     a.setTel(tTel.getText());
                     a.setAdresse(tAddress.getText());
+                    a.setVille(tVille.getText());
+                    a.setRegion(tRegion.getText());
                     a.setEmail(tEmail.getText());
                     OrganisationEvenements.controller.OrganisationEvenements.getLists().getAbonneList().add(a);
-                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(),a.getMdp(),'m');
+                    OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(), a.getMdp(), 'm');
                     this.dispose();
-            	}
+                }
             });
             bModifier.setText("Valider");
         }
@@ -223,6 +243,6 @@ public class InterfaceAbonne extends JFrame {
             this.dispose();
             OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().setVisible(true);
         });
-        
+
     }
 }

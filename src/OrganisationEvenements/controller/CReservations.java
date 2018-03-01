@@ -43,6 +43,23 @@ public class CReservations {
         ab.getEvenement().remove(ev);
     }
 
+    public DefaultTableModel getDtmListeEvenementsVilleRegionAbonne(Abonne a) {
+        int i = 0;
+        dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
+            /* Non editable */
+            @Override
+            public boolean isCellEditable(int row, int column) {
+                // all cells false
+                return false;
+            }
+        };
+        String villeAbonne = a.getVille();
+        String regionAbonne = a.getRegion();
+        
+
+        return null;
+    }
+
     public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {
         int i = 0;
         dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
