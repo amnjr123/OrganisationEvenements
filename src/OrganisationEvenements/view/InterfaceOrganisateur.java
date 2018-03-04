@@ -158,7 +158,7 @@ public class InterfaceOrganisateur extends JFrame {
                 a.setEmail(tEmail.getText());
                 OrganisationEvenements.controller.OrganisationEvenements.getLists().getOrganisateurList().add(a);
                 
-                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().afficherInterfaceOrganisateur('m');
+                OrganisationEvenements.controller.OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceOrganisateur('m',this);
                 this.dispose();
                 //this.setVisible(false);
                 //new InterfaceOrganisateur(a, 'm');

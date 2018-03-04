@@ -20,15 +20,15 @@ public class Accueil extends JFrame {
 	private JComboBox<String> cbUtilisateur;
 	private JButton bAcces;
 	private String[] lUtilisateurs = { "Organisme", "Organisateur", "Abonne" };
-	private DefaultTableModel dtmEvenement;
-	private String[] entetes = { "Type", "Titre", "Detail evenement", "Ville Concernee", "quota", "Validation", "Salle",
-			"Ville de la salle", "Adresse de la salle" };
+	
 	private JButton bCreation;
-
+	private CAccueil controleurAccueil;
+	
 	public Accueil() {
+		controleurAccueil= new CAccueil();
 		this.design();
 	}
-
+	/*Dessiner l'interface accueil*/
 	public void design() {
 		this.setTitle("Accueil");
 		this.setBounds(new Rectangle(0, 0, 900, 500));
@@ -52,20 +52,20 @@ public class Accueil extends JFrame {
 		/* JDK 8 Notation */
 		bAcces.addActionListener(e -> {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				afficherInterfaceAbonne(null,null,'m');
+				controleurAccueil.afficherInterfaceAbonne(null,null,'m',this);
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				afficherInterfaceOrganisateur('m');
+				controleurAccueil.afficherInterfaceOrganisateur('m',this);
 			} else {
-				afficherInterfaceGestionnaireOrganisme('m');
+				controleurAccueil.afficherInterfaceGestionnaireOrganisme('m',this);
 			}
 		});
 		bCreation.addActionListener(e -> {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				afficherInterfaceAbonne(null,null,'c');
+				controleurAccueil.afficherInterfaceAbonne(null,null,'c',this);
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				afficherInterfaceOrganisateur('c');
+				controleurAccueil.afficherInterfaceOrganisateur('c',this);
 			} else {
-				afficherInterfaceGestionnaireOrganisme('c');
+				controleurAccueil.afficherInterfaceGestionnaireOrganisme('c',this);
 			}
 		});
 
@@ -79,7 +79,8 @@ public class Accueil extends JFrame {
 		// Table consultation
 		tConsultation = new JTable();
 		tConsultation.clearSelection();
-		remplirTableEvenement();
+		tConsultation.setModel(controleurAccueil.remplirTableEvenement());
+	
 		pConsultation.setViewportView(tConsultation);
 
 		this.setLocationRelativeTo(null);
@@ -87,6 +88,7 @@ public class Accueil extends JFrame {
 		this.setVisible(true);
 	}
 
+	/* Méthodes de gestion pour le controleur d'accueil*/
 	public JTable gettConsultation() {
 		return tConsultation;
 	}
@@ -94,140 +96,12 @@ public class Accueil extends JFrame {
 	public JComboBox<String> getCbUtilisateur() {
 		return cbUtilisateur;
 	}
+	
+	public CAccueil getControleurAccueil() {
+		return controleurAccueil;
+	}
 
 	public JButton getbAcces() {
 		return bAcces;
-	}
-
-	public void remplirTableEvenement() {
-		/* Bach maykonch tikrar f la table une fois revenu l accueil */
-		if (OrganisationEvenements.getLists().getEvt().isEmpty()) {
-			OrganisationEvenements.getLists().remplirListEvtTest();
-		}
-		Lists lists = OrganisationEvenements.getLists();
-
-		dtmEvenement = new DefaultTableModel(entetes, 0) {
-			/* Non editable */
-			@Override
-			public boolean isCellEditable(int row, int column) {
-				// all cells false
-				return false;
-			}
-		};
-		for (int i = 0; i < lists.getEvt().size(); i++) {
-			String type = lists.getEvt().get(i).getType();
-			String titre = lists.getEvt().get(i).getTitre();
-			String detailEvenement = lists.getEvt().get(i).getDetailEvenement();
-			String ville = lists.getEvt().get(i).getVilleConcernee();
-			int quota = lists.getEvt().get(i).getQuota();
-			String validation = lists.getEvt().get(i).getValidation();
-			String nomSalle;
-			String villeSalle;
-			String adresseSalle;
-			try {
-				nomSalle = lists.getEvt().get(i).getSalle().getNom();
-				villeSalle = lists.getEvt().get(i).getSalle().getVille();
-				adresseSalle = lists.getEvt().get(i).getSalle().getAdresse();
-			} catch (Exception e) {
-				nomSalle = "Aucune salle n'est affectee";
-				villeSalle = "";
-				adresseSalle = "";
-			}
-			Object[] data = { type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
-					adresseSalle };
-			dtmEvenement.addRow(data);
-		}
-		tConsultation.setModel(dtmEvenement);
-	}
-
-	/* Log Accï¿½s */
-	public Hashtable<String, String> login() {
-		Hashtable<String, String> logininformation = new Hashtable<String, String>();
-
-		JPanel panel = new JPanel(new BorderLayout(5, 5));
-
-		JPanel plabel = new JPanel(new GridLayout(0, 1, 2, 2));
-		plabel.add(new JLabel("Login", SwingConstants.RIGHT));
-		plabel.add(new JLabel("Password", SwingConstants.RIGHT));
-		panel.add(plabel, BorderLayout.WEST);
-
-		JPanel controls = new JPanel(new GridLayout(0, 1, 2, 2));
-		JTextField username = new JTextField();
-		controls.add(username);
-		JPasswordField password = new JPasswordField();
-		controls.add(password);
-		panel.add(controls, BorderLayout.CENTER);
-
-		JOptionPane.showMessageDialog(this, panel, "Login", JOptionPane.QUESTION_MESSAGE);
-
-		logininformation.put("login", username.getText());
-		logininformation.put("password", new String(password.getPassword()));
-		return logininformation;
-	}
-
-	public Abonne afficherInterfaceAbonne(String login, String password, char nature) {
-		boolean exist = false;
-		Abonne ab = new Abonne();
-		if (nature == 'm') {
-                if ((login == null)&&(password == null)){
-                    Hashtable<String, String> t = login();
-                    login = t.get("login");
-                    password=t.get("password");
-                }			
-			for (Abonne a : OrganisationEvenements.getLists().getAbonneList()) {
-				if (login.equals(a.getLogin()) && password.equals(a.getMdp())) {
-					exist = true;
-					ab = a;
-					this.setVisible(false);
-					new InterfaceAbonne(ab, nature);
-				}
-			}
-			if (!exist)
-				JOptionPane.showMessageDialog(this, "Compte Abonne non trouve, penser a en creer un");
-
-		} else
-			new InterfaceAbonne(ab, 'c');
-
-		return ab;
-	}
-
-	public Organisateur afficherInterfaceOrganisateur(char nature) {
-		boolean exist = false;
-		Organisateur ab = new Organisateur();
-		if (nature == 'm') {
-			Hashtable<String, String> t = login();
-			for (Organisateur a : OrganisationEvenements.getLists().getOrganisateurList()) {
-				if (t.get("login").equals(a.getLogin()) && t.get("password").equals(a.getMdp())) {
-					exist = true;
-					ab = a;
-					this.setVisible(false);
-					new InterfaceOrganisateur(ab, nature);
-				}
-			}
-			if (!exist)
-				JOptionPane.showMessageDialog(this, "Compte Organisateur non trouve, penser a en creer un");
-		} else
-			new InterfaceOrganisateur(ab, 'c');
-		return ab;
-	}
-
-	public GestionnaireOrganisme afficherInterfaceGestionnaireOrganisme(char nature) {
-		boolean exist = false;
-		GestionnaireOrganisme ab = new GestionnaireOrganisme();
-		if (nature == 'm') {
-			Hashtable<String, String> t = login();
-			for (GestionnaireOrganisme a : OrganisationEvenements.getLists().getGestionnaireOrganismeList()) {
-				if (t.get("login").equals(a.getLogin()) && t.get("password").equals(a.getMdp())) {
-					exist = true;
-					ab = a;
-					this.setVisible(false);
-					new InterfaceGestionnaireOrganisme(ab, nature);
-				}
-			}
-			if (!exist)
-				JOptionPane.showMessageDialog(this, "Compte Organisateur non trouve, penser a en creer un");
-		} else
-			new InterfaceGestionnaireOrganisme(ab, 'c');
-		return ab;
 	}
 }

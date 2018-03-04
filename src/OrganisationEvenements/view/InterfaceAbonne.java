@@ -64,11 +64,11 @@ public class InterfaceAbonne extends JFrame {
     public InterfaceAbonne(Abonne a, char nature) {
         this.abonne=a;
         controleurReservation = new CReservations();
-        this.setNatureOperation(a, nature);
-        this.design(a);
+        this.setNatureOperation(nature);
+        this.design();
     }
 
-    public void design(Abonne a) {
+    public void design() {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         this.setTitle("Interface abonne");
         this.setBounds(new Rectangle(0, 0, 900, 500));
@@ -114,10 +114,10 @@ public class InterfaceAbonne extends JFrame {
         //Delete Button
         bSuppr.addActionListener(e -> {
             String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre pass actuel", JOptionPane.YES_NO_OPTION);
-            if (OrganisationEvenements.getLists().getAbonne(a.getLogin()).getMdp().equals(mdp)) {
-                int dialogResult = JOptionPane.showConfirmDialog(null, "Vous �tes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
+            if (OrganisationEvenements.getLists().getAbonne(abonne.getLogin()).getMdp().equals(mdp)) {
+                int dialogResult = JOptionPane.showConfirmDialog(null, "Vous etes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
-                    OrganisationEvenements.getLists().getAbonneList().remove(a);
+                    OrganisationEvenements.getLists().getAbonneList().remove(abonne);
                     OrganisationEvenements.getFenetreAccueil().setVisible(true);
                     this.dispose();
                 }
@@ -178,15 +178,15 @@ public class InterfaceAbonne extends JFrame {
         formLayoutMgr.setVerticalGroup(vGroup);
 
         //Fill text areas
-        tLogin.setText(a.getLogin());
-        tPassword.setText(a.getMdp());
-        tLastName.setText(a.getNom());
-        tFirstName.setText(a.getPrenom());
-        tTel.setText(a.getTel());
-        tEmail.setText(a.getEmail());
-        tAddress.setText(a.getAdresse());
-        tVille.setText(a.getVille());
-        tRegion.setText(a.getRegion());
+        tLogin.setText(abonne.getLogin());
+        tPassword.setText(abonne.getMdp());
+        tLastName.setText(abonne.getNom());
+        tFirstName.setText(abonne.getPrenom());
+        tTel.setText(abonne.getTel());
+        tEmail.setText(abonne.getEmail());
+        tAddress.setText(abonne.getAdresse());
+        tVille.setText(abonne.getVille());
+        tRegion.setText(abonne.getRegion());
 
         this.setContentPane(pPrincipal);
         pPrincipal.setLayout(new BorderLayout());
@@ -196,7 +196,6 @@ public class InterfaceAbonne extends JFrame {
         pMenu.add(bAccueil);
         this.setLocationRelativeTo(null);
         this.setVisible(true);
-
     }
 
     public boolean verif() {
@@ -214,7 +213,7 @@ public class InterfaceAbonne extends JFrame {
         return t;
     }
 
-    public void setNatureOperation(Abonne a, char nature) {
+    public void setNatureOperation(char nature) {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
             pReservation.setLayout(new BorderLayout());
@@ -224,6 +223,8 @@ public class InterfaceAbonne extends JFrame {
             spEvenements.setViewportView(tEvenements);
             tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
             tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
+            System.out.println(abonne.getVille());
+
             spEvenements.setPreferredSize(new Dimension(0, 100));
             
             bModifier.setText("Enregistrer les modification");
@@ -233,12 +234,14 @@ public class InterfaceAbonne extends JFrame {
             /*bouton action*/
             bModifier.addActionListener(e -> {
                 if (verif()) {
-                    a.setTel(tTel.getText());
-                    a.setEmail(tEmail.getText());
-                    a.setAdresse(tAddress.getText());
-                    a.setVille(tVille.getText());
-                    a.setRegion(tRegion.getText());
-                    a.setMdp(new String(tPassword.getPassword()));
+                    abonne.setTel(tTel.getText());
+                    abonne.setEmail(tEmail.getText());
+                    abonne.setAdresse(tAddress.getText());
+                    abonne.setVille(tVille.getText());
+                    abonne.setRegion(tRegion.getText());
+                    abonne.setMdp(new String(tPassword.getPassword()));
+                    tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
+                    tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
                     JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
                 } else {
                    JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
@@ -250,22 +253,21 @@ public class InterfaceAbonne extends JFrame {
             /*bouton action*/
             bModifier.addActionListener(e -> {
                 if (verif()) {
-                    a.setPrenom(tFirstName.getText());
-                    a.setNom(tLastName.getText());
-                    a.setLogin(tLogin.getText());
-                    a.setMdp(new String(tPassword.getPassword()));
-                    a.setTel(tTel.getText());
-                    a.setAdresse(tAddress.getText());
-                    a.setVille(tVille.getText());
-                    a.setRegion(tRegion.getText());
-                    a.setEmail(tEmail.getText());
-                    OrganisationEvenements.getLists().getAbonneList().add(a);
-                    OrganisationEvenements.getFenetreAccueil().afficherInterfaceAbonne(a.getLogin(), a.getMdp(), 'm');
-                    JOptionPane.showMessageDialog(this, "Compte créé avec succès ! Yala raw3a :D !");
+                    abonne.setPrenom(tFirstName.getText());
+                    abonne.setNom(tLastName.getText());
+                    abonne.setLogin(tLogin.getText());
+                    abonne.setMdp(new String(tPassword.getPassword()));
+                    abonne.setTel(tTel.getText());
+                    abonne.setAdresse(tAddress.getText());
+                    abonne.setVille(tVille.getText());
+                    abonne.setRegion(tRegion.getText());
+                    abonne.setEmail(tEmail.getText());
+                    OrganisationEvenements.getLists().getAbonneList().add(abonne);
+                    OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceAbonne(abonne.getLogin(), abonne.getMdp(), 'm',this);
+                    JOptionPane.showMessageDialog(this, "Compte cree avec succes ! Yala raw3a :D !");
                     this.dispose();
-                } else {
-                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
-                }
+                } else 
+                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");       
             });
             bModifier.setText("Valider");
         }

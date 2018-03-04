@@ -36,11 +36,12 @@ public class Abonne extends Personne {
         evenement = new ArrayList<Evenement>();
     }
 
-    public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse) {
+    public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse,String ville) {
         super(nom, prenom, login, mdp);
         this.tel = tel;
         this.email = email;
         this.adresse = adresse;
+        this.ville=ville;
         evenement = new ArrayList<Evenement>();
     }
 
