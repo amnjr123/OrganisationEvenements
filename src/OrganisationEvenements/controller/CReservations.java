@@ -57,8 +57,14 @@ public class CReservations {
     }
 
     public void reserverEvenement(Evenement ev, Abonne ab) {
-        ab.getEvenement().add(ev);
-        ev.getAbonne().add(ab);
+        if (ev.getAbonne().size() < ev.getQuota()) {
+            ab.getEvenement().add(ev);
+            ev.getAbonne().add(ab);
+            JOptionPane.showMessageDialog(new JFrame(), "L'evenement " + ev.getTitre() + " a ete reserve avec sussces ! Yala raw3a");
+        } else {
+            JOptionPane.showMessageDialog(new JFrame(), "Plus de places disponibles pour cet evenement !");
+        }
+
     }
 
     public void annulerReservationEvenement(Evenement ev, Abonne ab) {
@@ -73,8 +79,12 @@ public class CReservations {
             String type = tSource.getModel().getValueAt(tSource.getSelectedRow(), 0).toString();
             String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 1).toString();
             String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
-            reserverEvenement(rechercheEvenement(type, titre, detail), abonne);
-            JOptionPane.showMessageDialog(new JFrame(), "L'evenement " + titre + " a ete reserve avec sussces ! Yala raw3a");
+            Evenement ev = rechercheEvenement(type, titre, detail);
+            if (!(ev == null)) {
+                reserverEvenement(ev, abonne);
+            } else {
+                JOptionPane.showMessageDialog(new JFrame(), "Erreur lors de la reservation");
+            }
         }
 
     }
