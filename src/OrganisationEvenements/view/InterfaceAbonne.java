@@ -10,6 +10,8 @@ import OrganisationEvenements.controller.*;
 import OrganisationEvenements.model.Abonne;
 import java.awt.Color;
 import java.awt.Dimension;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import javax.swing.GroupLayout.Alignment;
 import javax.swing.border.Border;
 import javax.swing.border.EmptyBorder;
@@ -52,17 +54,21 @@ public class InterfaceAbonne extends JFrame {
     private JScrollPane spReservations = new JScrollPane();
     private JTable tEvenements = new JTable();
     private JTable tReservations = new JTable();
-    
+
+    private JPanel pEvenements = new JPanel();
+    private JPanel pButtonsReservation = new JPanel();
+    private JButton bAjoutRes = new JButton("Reserver");
+    private JButton bSupRes = new JButton("Annuler la reservation");
+
     private Abonne abonne;
     private CReservations controleurReservation;
 
     public Abonne getAbonne() {
         return abonne;
     }
-    
 
     public InterfaceAbonne(Abonne a, char nature) {
-        this.abonne=a;
+        this.abonne = a;
         controleurReservation = new CReservations();
         this.setNatureOperation(nature);
         this.design();
@@ -217,16 +223,42 @@ public class InterfaceAbonne extends JFrame {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
             pReservation.setLayout(new BorderLayout());
-            pReservation.add(spEvenements, BorderLayout.NORTH);
-            pReservation.add(spReservations, BorderLayout.CENTER);
+            pReservation.add(pEvenements, BorderLayout.CENTER);
+            pEvenements.setLayout(new BorderLayout());
+            pEvenements.add(spEvenements, BorderLayout.CENTER);
+            pEvenements.add(pButtonsReservation, BorderLayout.NORTH);
+            pReservation.add(spReservations, BorderLayout.NORTH);
+            spEvenements.setBorder(BorderFactory.createTitledBorder("Liste d'evenements sur " + abonne.getVille()));
+            spReservations.setBorder(BorderFactory.createTitledBorder("Mes reservations"));
+            pButtonsReservation.add(bAjoutRes);
+            pButtonsReservation.add(bSupRes);
+
+            bAjoutRes.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleurReservation.reserverEvenementFromTable(tEvenements, abonne);
+                    tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
+                    tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
+                }
+            });
+
+            bSupRes.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    controleurReservation.annulerReservationFromTable(tReservations, abonne);
+                    tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
+                    tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
+                }
+            });
+
             spReservations.setViewportView(tReservations);
             spEvenements.setViewportView(tEvenements);
             tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
             tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
             System.out.println(abonne.getVille());
 
-            spEvenements.setPreferredSize(new Dimension(0, 100));
-            
+            spReservations.setPreferredSize(new Dimension(0, 150));
+
             bModifier.setText("Enregistrer les modification");
             tLogin.setEditable(false);
             tLastName.setEditable(false);
@@ -243,8 +275,9 @@ public class InterfaceAbonne extends JFrame {
                     tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
                     tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
                     JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
+                    spEvenements.setBorder(BorderFactory.createTitledBorder("Liste d'evenements sur " + abonne.getVille()));
                 } else {
-                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
+                    JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
                 }
             });
         } else {
@@ -263,11 +296,12 @@ public class InterfaceAbonne extends JFrame {
                     abonne.setRegion(tRegion.getText());
                     abonne.setEmail(tEmail.getText());
                     OrganisationEvenements.getLists().getAbonneList().add(abonne);
-                    OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceAbonne(abonne.getLogin(), abonne.getMdp(), 'm',this);
+                    OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceAbonne(abonne.getLogin(), abonne.getMdp(), 'm', this);
                     JOptionPane.showMessageDialog(this, "Compte cree avec succes ! Yala raw3a :D !");
                     this.dispose();
-                } else 
-                   JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");       
+                } else {
+                    JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
+                }
             });
             bModifier.setText("Valider");
         }

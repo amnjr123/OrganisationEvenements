@@ -14,6 +14,7 @@ import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableModel;
 import OrganisationEvenements.model.*;
 import OrganisationEvenements.view.*;
+import javax.swing.JTable;
 
 public class CAccueil {
 	private Lists lse;
@@ -24,6 +25,8 @@ public class CAccueil {
 	public CAccueil() {
 		lse = OrganisationEvenements.getLists();
 	}
+        
+
 
 	public DefaultTableModel remplirTableEvenement() {
 		/* Bach maykonch tikrar f la table une fois revenu l accueil */
@@ -90,7 +93,7 @@ public class CAccueil {
 		return logininformation;
 	}
 
-			/*	Méthodes D'affichages des interfaces	*/
+			/*	Mï¿½thodes D'affichages des interfaces	*/
 			/*			Interface abonnee				*/
 	public Abonne afficherInterfaceAbonne(String login, String password, char nature, JFrame frame) {
 		boolean exist = false;
@@ -157,6 +160,7 @@ public class CAccueil {
 			new InterfaceGestionnaireOrganisme(ab, 'c');
 		return ab;
 	}
+        
 
 	
 	

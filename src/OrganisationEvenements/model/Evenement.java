@@ -23,6 +23,7 @@ public class Evenement {
         this.villeConcernee = villeConcernee;
         this.quota = quota;
         this.validation = "En cours";
+        this.abonne = new ArrayList<Abonne>();
     }
 
     public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota, Salle salle) {
@@ -33,6 +34,7 @@ public class Evenement {
         this.quota = quota;
         this.validation = "En cours";
         this.salle=salle;
+        this.abonne = new ArrayList<Abonne>();
     }
 
     public String getType() {
