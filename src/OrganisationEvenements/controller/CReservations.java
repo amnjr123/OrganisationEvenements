@@ -56,6 +56,16 @@ public class CReservations {
         return null;
     }
 
+    public Reservation rechercheReservation(Evenement e, int nbPlaces, Abonne a) {
+        for (Reservation r : a.getReservation()) {
+            if (r.getEvenement() == e && r.getNbPlaces() == nbPlaces) {
+                return r;
+            }
+            System.out.print("mal9a walou");
+        }
+        return null;
+    }
+
     public int placesDisponibles(Evenement e) {
         int nbPlacesDispo = e.getQuota();
         for (Abonne a : lse.getAbonneList()) {
@@ -120,12 +130,12 @@ public class CReservations {
         if (tSource.getSelectionModel().isSelectionEmpty()) {
             JOptionPane.showMessageDialog(new JFrame(), "Selectionnez un evenement a annuler");
         } else {
-            String type = tSource.getModel().getValueAt(tSource.getSelectedRow(), 0).toString();
-            String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 1).toString();
-            String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
-            /*A rectifier*/
-            annulerReservationEvenement(null, abonne);
-            JOptionPane.showMessageDialog(new JFrame(), "La reservation a l'evenement " + titre + " a ete annulee avec sussces ! Yala raw3a");
+            int nbPlaces = Integer.parseInt(tSource.getModel().getValueAt(tSource.getSelectedRow(), 0).toString());
+            String type = tSource.getModel().getValueAt(tSource.getSelectedRow(), 1).toString();
+            String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
+            String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 3).toString();
+            annulerReservationEvenement(rechercheReservation(rechercheEvenement(type, titre, detail), nbPlaces, abonne), abonne);
+            JOptionPane.showMessageDialog(new JFrame(), "La reservation a l'evenement a ete annulee avec sussces ! Yala raw3a");
         }
 
     }
@@ -179,11 +189,11 @@ public class CReservations {
                 return false;
             }
         };
-        
+
         for (Reservation r : a.getReservation()) {
             int nbPlaces = r.getNbPlaces();
             String type = r.getEvenement().getType();
-            System.out.println(nbPlaces+" places evt"+type);
+            System.out.println(nbPlaces + " places evt" + type);
             String titre = r.getEvenement().getTitre();
             String detailEvenement = r.getEvenement().getDetailEvenement();
             String ville = r.getEvenement().getVilleConcernee();
