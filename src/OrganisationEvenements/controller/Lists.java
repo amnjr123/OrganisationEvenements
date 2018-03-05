@@ -55,6 +55,7 @@ public class Lists {
         evt.add(new Evenement("cont2", "yarebbinkouneghikanhle2", "detail3", "rabat", 10, salle1));
         evt.add(new Evenement("cont3", "yarebbinkouneghikanhle3", "detail4", "lyon", 10, salle1));
         evt.add(new Evenement("cont4", "yarebbinkouneghikanhle4", "detail5", "khemisset", 10));
+        organisateurList.add(new Organisateur("Monsieur","Bouzix","1","1","845665","bouzix@gmail.com"));
     }
 
     public ArrayList<Abonne> getAbonneList() {
