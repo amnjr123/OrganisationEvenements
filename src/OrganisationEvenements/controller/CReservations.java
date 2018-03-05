@@ -56,20 +56,48 @@ public class CReservations {
         return null;
     }
 
+    public int placesDisponibles(Evenement e) {
+        int nbPlacesDispo = e.getQuota();
+        for (Abonne a : lse.getAbonneList()) {
+            for (Reservation r : a.getReservation()) {
+                nbPlacesDispo = nbPlacesDispo - r.getNbPlaces();
+            }
+        }
+        return nbPlacesDispo;
+    }
+
     public void reserverEvenement(Evenement ev, Abonne ab) {
-        if (ev.getAbonne().size() < ev.getQuota()) {
-            ab.getEvenement().add(ev);
-            ev.getAbonne().add(ab);
-            JOptionPane.showMessageDialog(new JFrame(), "L'evenement " + ev.getTitre() + " a ete reserve avec sussces ! Yala raw3a");
-        } else {
-            JOptionPane.showMessageDialog(new JFrame(), "Plus de places disponibles pour cet evenement !");
+        int nbPlacesDispo = placesDisponibles(ev);
+        try {
+            int nbPlaces = Integer.parseInt(JOptionPane.showInputDialog("Veuillez préciser le nombre de places a reserver :"));
+            if (nbPlacesDispo >= nbPlaces) {
+                if (nbPlaces > 0) {
+                    ab.getReservation().add(new Reservation(ev, nbPlaces));
+                    if (nbPlaces == 1) {
+                        JOptionPane.showMessageDialog(new JFrame(), "Une place a ete reservee avec sussces pour l'evenement " + ev.getTitre() + " ! Yala raw3a");
+                    } else {
+                        JOptionPane.showMessageDialog(new JFrame(), nbPlaces + " places ont ete reservees avec sussces pour l'evenement " + ev.getTitre() + " ! Yala raw3a");
+                    }
+
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Le nombre de places doit etre superieur a 0");
+                }
+            } else {
+                if (nbPlacesDispo == 0) {
+                    JOptionPane.showMessageDialog(new JFrame(), "Cet évenement est complet !");
+                } else {
+                    JOptionPane.showMessageDialog(new JFrame(), "Plus que " + nbPlacesDispo + " places disponibles pour cet evenement !");
+                }
+
+            }
+        } catch (Exception e) {
+            JOptionPane.showMessageDialog(new JFrame(), "Erreur !");
         }
 
     }
 
-    public void annulerReservationEvenement(Evenement ev, Abonne ab) {
-        ab.getEvenement().remove(ev);
-        ev.getAbonne().remove(ab);
+    public void annulerReservationEvenement(Reservation r, Abonne ab) {
+        ab.getReservation().remove(r);
     }
 
     public void reserverEvenementFromTable(JTable tSource, Abonne abonne) {
@@ -86,7 +114,6 @@ public class CReservations {
                 JOptionPane.showMessageDialog(new JFrame(), "Erreur lors de la reservation");
             }
         }
-
     }
 
     public void annulerReservationFromTable(JTable tSource, Abonne abonne) {
@@ -96,7 +123,8 @@ public class CReservations {
             String type = tSource.getModel().getValueAt(tSource.getSelectedRow(), 0).toString();
             String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 1).toString();
             String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
-            annulerReservationEvenement(rechercheEvenement(type, titre, detail), abonne);
+            /*A rectifier*/
+            annulerReservationEvenement(null, abonne);
             JOptionPane.showMessageDialog(new JFrame(), "La reservation a l'evenement " + titre + " a ete annulee avec sussces ! Yala raw3a");
         }
 
@@ -114,7 +142,7 @@ public class CReservations {
         String villeAbonne = a.getVille();
         String regionAbonne = a.getRegion();
         for (Evenement e : lse.getEvt()) {
-            System.out.println(a.getVille());
+            //System.out.println(a.getVille());
             if (a.getVille().equalsIgnoreCase(e.getVilleConcernee())) {
                 String type = e.getType();
                 String titre = e.getTitre();
@@ -143,8 +171,7 @@ public class CReservations {
     }
 
     public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {
-        int i = 0;
-        dtmEvtRes = new DefaultTableModel(lse.getEntetesEvt(), 0) {
+        dtmEvtRes = new DefaultTableModel(lse.getEntetesRes(), 0) {
             /* Non editable */
             @Override
             public boolean isCellEditable(int row, int column) {
@@ -152,6 +179,33 @@ public class CReservations {
                 return false;
             }
         };
+        
+        for (Reservation r : a.getReservation()) {
+            int nbPlaces = r.getNbPlaces();
+            String type = r.getEvenement().getType();
+            System.out.println(nbPlaces+" places evt"+type);
+            String titre = r.getEvenement().getTitre();
+            String detailEvenement = r.getEvenement().getDetailEvenement();
+            String ville = r.getEvenement().getVilleConcernee();
+            int quota = r.getEvenement().getQuota();
+            String validation = r.getEvenement().getValidation();
+            String nomSalle;
+            String villeSalle;
+            String adresseSalle;
+            try {
+                nomSalle = r.getEvenement().getSalle().getNom();
+                villeSalle = r.getEvenement().getSalle().getVille();
+                adresseSalle = r.getEvenement().getSalle().getAdresse();
+            } catch (Exception e1) {
+                nomSalle = "Aucune salle n'est affectee";
+                villeSalle = "";
+                adresseSalle = "";
+            }
+            Object[] data = {nbPlaces, type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle,
+                adresseSalle};
+            dtmEvtRes.addRow(data);
+        }
+        /*
         while (i < a.getEvenement().size()) {
             String type = a.getEvenement().get(i).getType();
             String titre = a.getEvenement().get(i).getTitre();
@@ -174,7 +228,7 @@ public class CReservations {
             Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle, adresseSalle};
             dtmEvtRes.addRow(data);
             i++;
-        }
+        }*/
         return dtmEvtRes;
     }
 }

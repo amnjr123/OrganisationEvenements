@@ -13,6 +13,12 @@ public class Lists {
     private ArrayList<Evenement> evt;
     private String[] entetesEvt = {"Type", "Titre", "Detail evenement", "Ville Concernee", "quota", "Validation", "Salle",
         "Ville de la salle", "Adresse de la salle"};
+    private String[] entetesRes = {"Nombre de places","Type", "Titre", "Detail evenement", "Ville Concernee", "quota", "Validation", "Salle",
+        "Ville de la salle", "Adresse de la salle"};
+
+    public String[] getEntetesRes() {
+        return entetesRes;
+    }
 
     public String[] getEntetesEvt() {
         return entetesEvt;

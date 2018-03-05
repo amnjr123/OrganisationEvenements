@@ -10,7 +10,11 @@ public class Abonne extends Personne {
     private String ville;
     private String region;
     private ArrayList<Evenement> evenement;
-    
+    private ArrayList<Reservation> reservation;
+
+    public ArrayList<Reservation> getReservation() {
+        return reservation;
+    }
 
     public void setVille(String ville) {
         this.ville = ville;
@@ -34,6 +38,7 @@ public class Abonne extends Personne {
         this.email = "";
         this.adresse = "";
         evenement = new ArrayList<Evenement>();
+        reservation = new ArrayList<Reservation>();
     }
 
     public Abonne(String nom, String prenom, String login, String mdp, String tel, String email, String adresse,String ville) {
@@ -43,6 +48,7 @@ public class Abonne extends Personne {
         this.adresse = adresse;
         this.ville=ville;
         evenement = new ArrayList<Evenement>();
+        reservation = new ArrayList<Reservation>();
     }
 
     public String toString() {
