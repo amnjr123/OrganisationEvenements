@@ -9,7 +9,7 @@ public class Abonne extends Personne {
     private String adresse;
     private String ville;
     private String region;
-    private ArrayList<Evenement> evenement;
+    //private ArrayList<Evenement> evenement;
     private ArrayList<Reservation> reservation;
 
     public ArrayList<Reservation> getReservation() {
@@ -37,7 +37,7 @@ public class Abonne extends Personne {
         this.tel = "";
         this.email = "";
         this.adresse = "";
-        evenement = new ArrayList<Evenement>();
+        //evenement = new ArrayList<Evenement>();
         reservation = new ArrayList<Reservation>();
     }
 
@@ -47,7 +47,7 @@ public class Abonne extends Personne {
         this.email = email;
         this.adresse = adresse;
         this.ville=ville;
-        evenement = new ArrayList<Evenement>();
+        //evenement = new ArrayList<Evenement>();
         reservation = new ArrayList<Reservation>();
     }
 
@@ -79,7 +79,7 @@ public class Abonne extends Personne {
         this.adresse = adresse;
     }
 
-    public ArrayList<Evenement> getEvenement() {
+    /*public ArrayList<Evenement> getEvenement() {
         return this.evenement;
     }
 
@@ -90,6 +90,8 @@ public class Abonne extends Personne {
         }
     }
 
+    
+    
     public void addEvenement(Evenement newEvenement) {
         if (newEvenement == null) {
             return;
@@ -112,10 +114,14 @@ public class Abonne extends Personne {
             }
         }
     }
+    
+    
 
     public void removeAllEvenement() {
         if (evenement != null) {
             evenement.clear();
         }
     }
+    
+    */
 }

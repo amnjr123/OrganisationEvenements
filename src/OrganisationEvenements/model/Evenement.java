@@ -12,7 +12,7 @@ public class Evenement {
     private String validation;
 
     private Salle salle;
-    private ArrayList<Abonne> abonne;
+    //private ArrayList<Abonne> abonne;
 
     public GestionnaireOrganisme gestionnaireOrganisme;
 
@@ -23,7 +23,7 @@ public class Evenement {
         this.villeConcernee = villeConcernee;
         this.quota = quota;
         this.validation = "En cours";
-        this.abonne = new ArrayList<Abonne>();
+        //this.abonne = new ArrayList<Abonne>();
     }
 
     public Evenement(String type, String titre, String detailEvenement, String villeConcernee, int quota, Salle salle) {
@@ -34,7 +34,7 @@ public class Evenement {
         this.quota = quota;
         this.validation = "En cours";
         this.salle=salle;
-        this.abonne = new ArrayList<Abonne>();
+        //this.abonne = new ArrayList<Abonne>();
     }
 
     public String getType() {
@@ -93,9 +93,9 @@ public class Evenement {
         this.gestionnaireOrganisme = gestionnaireOrganisme;
     }
 
-    public ArrayList<Abonne> getAbonne() {
+    /*public ArrayList<Abonne> getAbonne() {
         return abonne;
-    }
+    }*/
 
     public Salle getSalle() {
         return salle;
