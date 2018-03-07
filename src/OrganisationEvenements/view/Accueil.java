@@ -54,18 +54,18 @@ public class Accueil extends JFrame {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
 				controleurAccueil.afficherInterfaceAbonne(null,null,'m',this);
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				controleurAccueil.afficherInterfaceOrganisateur('m',this);
+				controleurAccueil.afficherInterfaceOrganisateur(null,null,'m',this);
 			} else {
-				controleurAccueil.afficherInterfaceGestionnaireOrganisme('m',this);
+				controleurAccueil.afficherInterfaceGestionnaireOrganisme(null,null,'m',this);
 			}
 		});
 		bCreation.addActionListener(e -> {
 			if (cbUtilisateur.getSelectedItem() == "Abonne") {
 				controleurAccueil.afficherInterfaceAbonne(null,null,'c',this);
 			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				controleurAccueil.afficherInterfaceOrganisateur('c',this);
+				controleurAccueil.afficherInterfaceOrganisateur(null,null,'c',this);
 			} else {
-				controleurAccueil.afficherInterfaceGestionnaireOrganisme('c',this);
+				controleurAccueil.afficherInterfaceGestionnaireOrganisme(null,null,'c',this);
 			}
 		});
 
@@ -88,7 +88,7 @@ public class Accueil extends JFrame {
 		this.setVisible(true);
 	}
 
-	/* Méthodes de gestion pour le controleur d'accueil*/
+	/* Mï¿½thodes de gestion pour le controleur d'accueil*/
 	public JTable gettConsultation() {
 		return tConsultation;
 	}

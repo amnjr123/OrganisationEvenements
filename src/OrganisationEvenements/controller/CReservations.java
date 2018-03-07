@@ -101,7 +101,7 @@ public class CReservations {
 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(new JFrame(), "Erreur !");
+            JOptionPane.showMessageDialog(new JFrame(), "Kteb lia chi haja SAHIHA !");
         }
 
     }
@@ -118,10 +118,10 @@ public class CReservations {
             String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 1).toString();
             String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
             Evenement ev = rechercheEvenement(type, titre, detail);
-            if (!(ev == null)) {
+            if (!(ev == null) && ev.getValidation().equalsIgnoreCase("accepte")) {
                 reserverEvenement(ev, abonne);
             } else {
-                JOptionPane.showMessageDialog(new JFrame(), "Erreur lors de la reservation");
+                JOptionPane.showMessageDialog(new JFrame(), "L'evenement n'est pas encore valide par l'organisme, veuillez reessayer plustard");
             }
         }
     }

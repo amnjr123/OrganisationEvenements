@@ -59,7 +59,7 @@ public class InterfaceAbonne extends JFrame {
     private JPanel pButtonsReservation = new JPanel();
     private JButton bAjoutRes = new JButton("Reserver");
     private JButton bSupRes = new JButton("Annuler la reservation");
-
+    
     private Abonne abonne;
     private CReservations controleurReservation;
 
@@ -222,6 +222,8 @@ public class InterfaceAbonne extends JFrame {
     public void setNatureOperation(char nature) {
         if (nature == 'm') {
             tPPrincipal.add("Mes reservations", pReservation);
+            
+            
             pReservation.setLayout(new BorderLayout());
             pReservation.add(pEvenements, BorderLayout.CENTER);
             pEvenements.setLayout(new BorderLayout());
