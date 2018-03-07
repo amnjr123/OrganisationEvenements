@@ -294,14 +294,7 @@ public class InterfaceGestionnaireOrganisme extends JFrame {
                     tSalles.setModel(controleurGestionnaireOrganisme.remplirTableSalle());
                 }
             });
-            bRejetEv.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                 //  controleurGestionnaireOrganisme.annulerReservationFromTable(tSalles, abonne);
-                    tEvenements.setModel(controleurGestionnaireOrganisme.remplirTableEvenement());
-                    tSalles.setModel(controleurGestionnaireOrganisme.remplirTableSalle());
-                }
-            });
+            
 
             spSalles.setViewportView(tSalles);
             spEvenements.setViewportView(tEvenements);
