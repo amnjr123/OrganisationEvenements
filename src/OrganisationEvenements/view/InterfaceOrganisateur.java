@@ -135,7 +135,7 @@ public class InterfaceOrganisateur extends JFrame {
         tPasswordConfirm.getDocument().addDocumentListener(documentListenerPasswordCofirm);
         //Delete Button
         bSuppr.addActionListener(e -> {
-            String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre pass actuel", JOptionPane.YES_NO_OPTION);
+            String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre mot de passe actuel", JOptionPane.YES_NO_OPTION);
             if (OrganisationEvenements.getLists().getOrganisateur(organisateur.getLogin()).getMdp().equals(mdp)) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Vous etes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
@@ -144,7 +144,7 @@ public class InterfaceOrganisateur extends JFrame {
                     this.dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(this, " I am asking for your pass !!");
+                JOptionPane.showMessageDialog(this, "Mot de passe erronne !");
             }
         });
         //Layout manager du formulaire
@@ -409,7 +409,7 @@ public class InterfaceOrganisateur extends JFrame {
                     organisateur.setMdp(new String(tPassword.getPassword()));
                     //tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
                     //tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
-                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
+                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes !");
                     spEvenements.setBorder(BorderFactory.createTitledBorder("Liste d'evenements"));
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");

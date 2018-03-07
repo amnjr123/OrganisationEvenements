@@ -102,7 +102,7 @@ public class InterfaceGestionnaireOrganisme extends JFrame {
         tPasswordConfirm.getDocument().addDocumentListener(documentListenerPasswordCofirm);
         //Delete Button
         bSuppr.addActionListener(e -> {
-            String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre pass actuel", JOptionPane.YES_NO_OPTION);
+            String mdp = JOptionPane.showInputDialog(this, "Veuillez Rentrer votre mot de passe actuel", JOptionPane.YES_NO_OPTION);
             if (OrganisationEvenements.getLists().getGestionnaireOrganisme(gestionnaireOrganisme.getLogin()).getMdp().equals(mdp)) {
                 int dialogResult = JOptionPane.showConfirmDialog(null, "Vous etes sur de vouloir supprimer ce compte?", "Warning", JOptionPane.YES_NO_OPTION);
                 if (dialogResult == JOptionPane.YES_OPTION) {
@@ -319,7 +319,7 @@ public class InterfaceGestionnaireOrganisme extends JFrame {
                 if (verif()) {
         
                     gestionnaireOrganisme.setMdp(new String(tPassword.getPassword()));
-                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
+                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes !");
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
                 }
@@ -337,7 +337,7 @@ public class InterfaceGestionnaireOrganisme extends JFrame {
                     
                     OrganisationEvenements.getLists().getGestionnaireOrganismeList().add(gestionnaireOrganisme);
                     OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceGestionnaireOrganisme(gestionnaireOrganisme.getLogin(), gestionnaireOrganisme.getMdp(), 'm', this);
-                    JOptionPane.showMessageDialog(this, "Compte cree avec succes ! Yala raw3a :D !");
+                    JOptionPane.showMessageDialog(this, "Compte cree avec succes !");
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");

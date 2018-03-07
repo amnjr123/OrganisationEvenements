@@ -60,7 +60,7 @@ public class Lists {
         }
         return o;
     }
-
+/*
 public void remplirListEvtTest() {
     	Salle salle2 = new Salle("9ism ra9m 6", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
         
@@ -85,7 +85,7 @@ public void remplirListEvtTest() {
         gestionnaireOrganismeList.add(new GestionnaireOrganisme("BOUDYACH", "Anas", "1", "1"));
 
     }
-
+*/
     public ArrayList<Abonne> getAbonneList() {
         return abonneList;
     }

@@ -128,7 +128,7 @@ public class InterfaceAbonne extends JFrame {
                     this.dispose();
                 }
             } else {
-                JOptionPane.showMessageDialog(this, " I am asking for your pass !!");
+                JOptionPane.showMessageDialog(this, "Mot de passe erronné!");
             }
         });
         //Layout manager du formulaire
@@ -276,7 +276,7 @@ public class InterfaceAbonne extends JFrame {
                     abonne.setMdp(new String(tPassword.getPassword()));
                     tReservations.setModel(controleurReservation.getDtmListeReservationsAbonne(abonne));
                     tEvenements.setModel(controleurReservation.getDtmListeEvenementsVilleRegionAbonne(abonne));
-                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes ! Yala raw3a :D, 2");
+                    JOptionPane.showMessageDialog(this, "Modification effectues avec succes !");
                     spEvenements.setBorder(BorderFactory.createTitledBorder("Liste d'evenements sur " + abonne.getVille()));
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
@@ -299,7 +299,7 @@ public class InterfaceAbonne extends JFrame {
                     abonne.setEmail(tEmail.getText());
                     OrganisationEvenements.getLists().getAbonneList().add(abonne);
                     OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceAbonne(abonne.getLogin(), abonne.getMdp(), 'm', this);
-                    JOptionPane.showMessageDialog(this, "Compte cree avec succes ! Yala raw3a :D !");
+                    JOptionPane.showMessageDialog(this, "Compte cree avec succes !");
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");

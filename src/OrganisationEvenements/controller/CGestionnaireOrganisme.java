@@ -119,9 +119,9 @@ public class CGestionnaireOrganisme {
 
 	public DefaultTableModel remplirTableSalle() {
 		/* Bach maykonch tikrar f la table une fois revenu l accueil */
-		if (lse.getEvt().isEmpty()) {
+		/*if (lse.getEvt().isEmpty()) {
 			lse.remplirListEvtTest();
-		}
+		}*/
 
 		dtmSalle = new DefaultTableModel(entetesSalle, 0) {
 			/* Non editable */
@@ -148,8 +148,8 @@ public class CGestionnaireOrganisme {
 
 	public DefaultTableModel remplirTableEvenement() {
 		/* Bach maykonch tikrar f la table une fois revenu l accueil */
-		if (OrganisationEvenements.getLists().getEvt().isEmpty())
-			OrganisationEvenements.getLists().remplirListEvtTest();
+		/*if (OrganisationEvenements.getLists().getEvt().isEmpty())
+			OrganisationEvenements.getLists().remplirListEvtTest();*/
 
 		dtmEvt = new DefaultTableModel(entetesEvt, 0) {
 			/* Non editable */
