@@ -81,11 +81,9 @@ public void remplirListEvtTest() {
         evt.add(new Evenement("cont3", "yarebbinkouneghikanhle3", "detail4", "lyon", 101));
         evt.add(new Evenement("cont4", "yarebbinkouneghikanhle4", "detail5", "khemisset", 10));
         organisateurList.add(new Organisateur("Monsieur","Bouzix","1","1","845665","bouzix@gmail.com"));
-<<<<<<< HEAD
+
         gestionnaireOrganismeList.add(new GestionnaireOrganisme("BOUDYACH", "Anas", "1", "1"));
-        
-=======
->>>>>>> 56a510f0bc0466184ad793401793c2c0670567d5
+
     }
 
     public ArrayList<Abonne> getAbonneList() {

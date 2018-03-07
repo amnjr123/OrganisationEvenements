@@ -1,4 +1,3 @@
-<<<<<<< HEAD
 /*
  * To change this license header, choose License Headers in Project Properties.
  * To change this template file, choose Tools | Templates
@@ -7,21 +6,16 @@
 package OrganisationEvenements.controller;
 
 import OrganisationEvenements.model.*;
-=======
-package OrganisationEvenements.controller;
-
 import OrganisationEvenements.model.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import javax.swing.JTable;
->>>>>>> 56a510f0bc0466184ad793401793c2c0670567d5
 import javax.swing.table.DefaultTableModel;
 
 /**
  *
  * @author Amine
  */
-<<<<<<< HEAD
 public class COrganisateur {
 
     private Lists lse;
@@ -157,8 +151,8 @@ public class COrganisateur {
     public void supprimerEvernement(Evenement e){
         lse.getEvt().remove(e);
     }
-=======
-
+}
+/*
 public class COrganisateur {
 
 	Lists lse;
@@ -181,7 +175,7 @@ public class COrganisateur {
 	 * new Evenement(type, titre, detailEvenement, villeConcernee, 0, salle);
 	 * lse.getEvt().remove(evt); }
 	 */
-	
+	/*
 	public Evenement rechercheEvenement(String type, String titre, String detail) {
 		for (Evenement e : lse.getEvt()) {
 			/*
@@ -189,7 +183,7 @@ public class COrganisateur {
 			 * System.out.println(e.getTitre()+" _ "+titre);
 			 * System.out.println(e.getDetailEvenement()+" _ "+detail);
 			 */
-			if (e.getType().equalsIgnoreCase(type) && e.getTitre().equalsIgnoreCase(titre)
+	/*		if (e.getType().equalsIgnoreCase(type) && e.getTitre().equalsIgnoreCase(titre)
 					&& e.getDetailEvenement().equalsIgnoreCase(detail)) {
 				System.out.print(e.getTitre());
 				return e;
@@ -262,11 +256,12 @@ public class COrganisateur {
 
 	}
 	*/
+        /*
 
 	public DefaultTableModel getDtmListeEvenementsVilleRegionOrganisateur(Organisateur o) {
 		dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
 			/* Non editable */
-			@Override
+	/*		@Override
 			public boolean isCellEditable(int row, int column) {
 				// all cells false
 				return false;
@@ -303,10 +298,10 @@ public class COrganisateur {
 		return dtmEvt;
 	}
 
-	public DefaultTableModel getDtmListeCreeOrganisateur(Organisateur o) { // méthode retour liste crée par l'orga
+	public DefaultTableModel getDtmListeCreeOrganisateur(Organisateur o) { // mï¿½thode retour liste crï¿½e par l'orga
 		dtmEvtCree = new DefaultTableModel(lse.getEntetesRes(), 0) {
 			/* Non editable */
-			@Override
+	/*		@Override
 			public boolean isCellEditable(int row, int column) {
 				// all cells false
 				return false;
@@ -355,7 +350,7 @@ public class COrganisateur {
 		 * ville, quota, validation, nomSalle, villeSalle, adresseSalle};
 		 * dtmEvtCree.addRow(data); i++; }
 		 */
-		return dtmEvtCree;
+	/*	return dtmEvtCree;
 	}
->>>>>>> 56a510f0bc0466184ad793401793c2c0670567d5
-}
+
+}*/
