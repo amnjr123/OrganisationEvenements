@@ -1,12 +1,8 @@
 package OrganisationEvenements.view;
 
-import OrganisationEvenements.controller.OrganisationEvenements;
 import java.awt.*;
-import java.util.*;
 import javax.swing.*;
 import OrganisationEvenements.controller.*;
-import OrganisationEvenements.model.*;
-import javax.swing.table.DefaultTableModel;
 
 public class Accueil extends JFrame {
 
