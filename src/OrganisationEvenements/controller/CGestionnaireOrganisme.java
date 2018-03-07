@@ -85,9 +85,7 @@ public class CGestionnaireOrganisme {
 				String titre = tSourceEvt.getModel().getValueAt(tSourceEvt.getSelectedRow(), 1).toString();
 				String detail = tSourceEvt.getModel().getValueAt(tSourceEvt.getSelectedRow(), 2).toString();
 				Evenement ev = rechercheEvenement(type, titre, detail);
-				System.out.print(ev.getTitre());
 				String nomS = tSourceSalle.getModel().getValueAt(tSourceSalle.getSelectedRow(), 0).toString();
-				System.out.println(nomS);
 				Salle salle = rechercheSalle(nomS); // nakhdo men table
 				if (!(ev == null || salle == null)) {
 					accoupler(ev, gO, salle);
@@ -111,9 +109,9 @@ public class CGestionnaireOrganisme {
 			e.setGestionnaireOrganisme(gO);
 			e.setSalle(s);
 			e.setValidation("accepte");
-			JOptionPane.showMessageDialog(new JFrame(), "Salle affectÈ, Evenement accepte");
+			JOptionPane.showMessageDialog(new JFrame(), "Salle affecte, Evenement accepte");
 		} else
-			JOptionPane.showMessageDialog(new JFrame(), "Erreur salle dÈj‡ affectÈ !");
+			JOptionPane.showMessageDialog(new JFrame(), "Erreur salle deja affecte !");
 
 	}
 
@@ -196,11 +194,10 @@ public class CGestionnaireOrganisme {
 					"Suppresion de la salle " + nomSalle, JOptionPane.YES_NO_OPTION);
 			if (choix == 0) {
 				for (Evenement e : lse.getEvt()) {
-					if (e.getSalle().getNom().equals(s.getNom()))
+					if (e.getSalle()==s)
 						e.setSalle(new Salle());
 				}
 				lse.getSalleList().remove(s);
-
 			}
 		}
 	}
@@ -215,6 +212,8 @@ public class CGestionnaireOrganisme {
 			Evenement ev = rechercheEvenement(type, titre, detail);
 			ev.setGestionnaireOrganisme(s);
 			ev.setValidation("rejet");
+                        JOptionPane.showMessageDialog(new JFrame(), "Evenement rejeté");
+
 		}
 	}
 
