@@ -12,12 +12,6 @@ import javax.swing.table.DefaultTableModel;
 
 public class CGestionnaireOrganisme {
 
-	/*
-	 * To change this license header, choose License Headers in Project
-	 * Properties. To change this template file, choose Tools | Templates and
-	 * open the template in the editor.
-	 */
-
 	private Lists lse;
 	private DefaultTableModel dtmEvt;
 	private DefaultTableModel dtmSalle;
@@ -31,17 +25,6 @@ public class CGestionnaireOrganisme {
 
 	}
 
-	/*
-	 * public void creerEvenement(String type, String titre, String
-	 * detailEvenement, String villeConcernee, Salle salle) { Evenement evt =
-	 * new Evenement(type, titre, detailEvenement, villeConcernee, 0, salle);
-	 * lse.getEvt().add(evt); }
-	 * 
-	 * public void supprimerEvenement(String type, String titre, String
-	 * detailEvenement, String villeConcernee, Salle salle) { Evenement evt =
-	 * new Evenement(type, titre, detailEvenement, villeConcernee, 0, salle);
-	 * lse.getEvt().remove(evt); }
-	 */
 	public Salle rechercheSalle(String nom) {
 		for (Salle s : lse.getSalleList()) {
 			if (s.getNom().equalsIgnoreCase(nom)) {
@@ -86,7 +69,7 @@ public class CGestionnaireOrganisme {
 				String detail = tSourceEvt.getModel().getValueAt(tSourceEvt.getSelectedRow(), 2).toString();
 				Evenement ev = rechercheEvenement(type, titre, detail);
 				String nomS = tSourceSalle.getModel().getValueAt(tSourceSalle.getSelectedRow(), 0).toString();
-				Salle salle = rechercheSalle(nomS); // nakhdo men table
+				Salle salle = rechercheSalle(nomS); 
 				if (!(ev == null || salle == null)) {
 					accoupler(ev, gO, salle);
 				} else {
@@ -116,16 +99,10 @@ public class CGestionnaireOrganisme {
 	}
 
 	public DefaultTableModel remplirTableSalle() {
-		/* Bach maykonch tikrar f la table une fois revenu l accueil */
-		/*if (lse.getEvt().isEmpty()) {
-			lse.remplirListEvtTest();
-		}*/
 
 		dtmSalle = new DefaultTableModel(entetesSalle, 0) {
-			/* Non editable */
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				// all cells false
 				return false;
 			}
 		};
@@ -145,15 +122,9 @@ public class CGestionnaireOrganisme {
 	}
 
 	public DefaultTableModel remplirTableEvenement() {
-		/* Bach maykonch tikrar f la table une fois revenu l accueil */
-		/*if (OrganisationEvenements.getLists().getEvt().isEmpty())
-			OrganisationEvenements.getLists().remplirListEvtTest();*/
-
 		dtmEvt = new DefaultTableModel(entetesEvt, 0) {
-			/* Non editable */
 			@Override
 			public boolean isCellEditable(int row, int column) {
-				// all cells false
 				return false;
 			}
 		};
@@ -235,7 +206,7 @@ public class CGestionnaireOrganisme {
 		lNbPlaces.setLocation(30, 150);
 		lNbPlaces.setSize(140, 20);
 
-		// Create and populate the panel.
+
 		JPanel p = new JPanel();
 
 		p.add(lNom);
@@ -265,7 +236,7 @@ public class CGestionnaireOrganisme {
 
 		frame.setLayout(new FlowLayout());
 
-		// Set up the content pane.
+
 		frame.setContentPane(p);
 		frame.addWindowListener(new WindowAdapter() {
 			@Override

@@ -1,6 +1,4 @@
-
 package OrganisationEvenements.controller;
-
 import OrganisationEvenements.model.*;
 import java.util.ArrayList;
 
@@ -9,10 +7,6 @@ import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.table.DefaultTableModel;
 
-/**
- *
- * @author Amine
- */
 public class CReservations {
 
     Lists lse;
@@ -27,22 +21,8 @@ public class CReservations {
 
     }
 
-    /*
-	 * public void creerEvenement(String type, String titre, String
-	 * detailEvenement, String villeConcernee, Salle salle) { Evenement evt =
-	 * new Evenement(type, titre, detailEvenement, villeConcernee, 0, salle);
-	 * lse.getEvt().add(evt); }
-	 * 
-	 * public void supprimerEvenement(String type, String titre, String
-	 * detailEvenement, String villeConcernee, Salle salle) { Evenement evt =
-	 * new Evenement(type, titre, detailEvenement, villeConcernee, 0, salle);
-	 * lse.getEvt().remove(evt); }
-     */
     public Evenement rechercheEvenement(String type, String titre, String detail) {
         for (Evenement e : lse.getEvt()) {
-            /*System.out.println(e.getType()+" _ "+type);
-            System.out.println(e.getTitre()+" _ "+titre);
-            System.out.println(e.getDetailEvenement()+" _ "+detail);*/
             if (e.getType().equalsIgnoreCase(type) && e.getTitre().equalsIgnoreCase(titre) && e.getDetailEvenement().equalsIgnoreCase(detail)) {
                 System.out.print(e.getTitre());
                 return e;
@@ -131,17 +111,15 @@ public class CReservations {
             String titre = tSource.getModel().getValueAt(tSource.getSelectedRow(), 2).toString();
             String detail = tSource.getModel().getValueAt(tSource.getSelectedRow(), 3).toString();
             annulerReservationEvenement(rechercheReservation(rechercheEvenement(type, titre, detail), nbPlaces, abonne), abonne);
-            JOptionPane.showMessageDialog(new JFrame(), "La reservation a l'evenement a ete annulee avec sussces ! Yala raw3a");
+            JOptionPane.showMessageDialog(new JFrame(), "La reservation a l'evenement a ete annulee avec sussces !");
         }
 
     }
 
     public DefaultTableModel getDtmListeEvenementsVilleRegionAbonne(Abonne a) {
         dtmEvt = new DefaultTableModel(lse.getEntetesEvt(), 0) {
-            /* Non editable */
             @Override
             public boolean isCellEditable(int row, int column) {
-                // all cells false
                 return false;
             }
         };
@@ -178,10 +156,8 @@ public class CReservations {
 
     public DefaultTableModel getDtmListeReservationsAbonne(Abonne a) {
         dtmEvtRes = new DefaultTableModel(lse.getEntetesRes(), 0) {
-            /* Non editable */
             @Override
             public boolean isCellEditable(int row, int column) {
-                // all cells false
                 return false;
             }
         };
@@ -211,30 +187,6 @@ public class CReservations {
                 adresseSalle};
             dtmEvtRes.addRow(data);
         }
-        /*
-        while (i < a.getEvenement().size()) {
-            String type = a.getEvenement().get(i).getType();
-            String titre = a.getEvenement().get(i).getTitre();
-            String detailEvenement = a.getEvenement().get(i).getDetailEvenement();
-            String ville = a.getEvenement().get(i).getVilleConcernee();
-            int quota = a.getEvenement().get(i).getQuota();
-            String validation = a.getEvenement().get(i).getValidation();
-            String nomSalle;
-            String villeSalle;
-            String adresseSalle;
-            try {
-                nomSalle = a.getEvenement().get(i).getSalle().getNom();
-                villeSalle = a.getEvenement().get(i).getSalle().getVille();
-                adresseSalle = a.getEvenement().get(i).getSalle().getAdresse();
-            } catch (Exception e) {
-                nomSalle = "Aucune salle n'est affectee";
-                villeSalle = "";
-                adresseSalle = "";
-            }
-            Object[] data = {type, titre, detailEvenement, ville, quota, validation, nomSalle, villeSalle, adresseSalle};
-            dtmEvtRes.addRow(data);
-            i++;
-        }*/
         return dtmEvtRes;
     }
 }

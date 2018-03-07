@@ -3,101 +3,112 @@ package OrganisationEvenements.view;
 import java.awt.*;
 import javax.swing.*;
 import OrganisationEvenements.controller.*;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
+import java.awt.event.ComponentListener;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
 
 public class Accueil extends JFrame {
 
-	// Declaration panels
-	private JPanel pPrincipal;
-	private JPanel pAcces;
-	private JScrollPane pConsultation;
-	// Declaration Tableau
-	private JTable tConsultation;
-	// Declaration objets acces
-	private JComboBox<String> cbUtilisateur;
-	private JButton bAcces;
-	private String[] lUtilisateurs = { "Organisme", "Organisateur", "Abonne" };
-	
-	private JButton bCreation;
-	private CAccueil controleurAccueil;
-	
-	public Accueil() {
-		controleurAccueil= new CAccueil();
-		this.design();
-	}
-	/*Dessiner l'interface accueil*/
-	public void design() {
-		this.setTitle("Accueil");
-		this.setBounds(new Rectangle(0, 0, 900, 500));
-		this.setLayout(new BorderLayout());
-		// Panel principal
-		pPrincipal = new JPanel();
-		pPrincipal.setLayout(new BorderLayout());
-		this.add(pPrincipal, BorderLayout.CENTER);
-		// panel Acces
-		pAcces = new JPanel();
-		pAcces.setBorder(BorderFactory.createTitledBorder("Acces"));
-		pPrincipal.add(pAcces, BorderLayout.NORTH);
-		cbUtilisateur = new JComboBox<String>(lUtilisateurs);
-		/* Button COnnexion */
-		bAcces = new JButton("Acceder");
-		bCreation = new JButton("Creer un compte");
-		pAcces.add(cbUtilisateur);
-		/**
-		 * Button config actionListener
-		 */
-		/* JDK 8 Notation */
-		bAcces.addActionListener(e -> {
-			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				controleurAccueil.afficherInterfaceAbonne(null,null,'m',this);
-			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				controleurAccueil.afficherInterfaceOrganisateur(null,null,'m',this);
-			} else {
-				controleurAccueil.afficherInterfaceGestionnaireOrganisme(null,null,'m',this);
-			}
-		});
-		bCreation.addActionListener(e -> {
-			if (cbUtilisateur.getSelectedItem() == "Abonne") {
-				controleurAccueil.afficherInterfaceAbonne(null,null,'c',this);
-			} else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
-				controleurAccueil.afficherInterfaceOrganisateur(null,null,'c',this);
-			} else {
-				controleurAccueil.afficherInterfaceGestionnaireOrganisme(null,null,'c',this);
-			}
-		});
+    // Declaration panels
+    private JPanel pPrincipal;
+    private JPanel pAcces;
+    private JScrollPane pConsultation;
+    // Declaration Tableau
+    private JTable tConsultation;
+    // Declaration objets acces
+    private JComboBox<String> cbUtilisateur;
+    private JButton bAcces;
+    private String[] lUtilisateurs = {"Organisme", "Organisateur", "Abonne"};
 
-		/* End button config */
-		pAcces.add(bAcces);
-		pAcces.add(bCreation);
-		// Panel Consultation
-		pConsultation = new JScrollPane();
-		pConsultation.setBorder(BorderFactory.createTitledBorder("Liste d'evenements"));
-		pPrincipal.add(pConsultation, BorderLayout.CENTER);
-		// Table consultation
-		tConsultation = new JTable();
-		tConsultation.clearSelection();
-		tConsultation.setModel(controleurAccueil.remplirTableEvenement());
-	
-		pConsultation.setViewportView(tConsultation);
+    private JButton bCreation;
+    private CAccueil controleurAccueil;
 
-		this.setLocationRelativeTo(null);
-		this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		this.setVisible(true);
-	}
+    public Accueil() {
+        controleurAccueil = new CAccueil();
+        this.design();
+    }
 
-	/* M�thodes de gestion pour le controleur d'accueil*/
-	public JTable gettConsultation() {
-		return tConsultation;
-	}
+    /*Dessiner l'interface accueil*/
+    public void design() {
+        this.setTitle("Accueil");
+        this.setBounds(new Rectangle(0, 0, 900, 500));
+        this.setLayout(new BorderLayout());
+        // Panel principal
+        pPrincipal = new JPanel();
+        pPrincipal.setLayout(new BorderLayout());
+        this.add(pPrincipal, BorderLayout.CENTER);
+        // panel Acces
+        pAcces = new JPanel();
+        pAcces.setBorder(BorderFactory.createTitledBorder("Acces"));
+        pPrincipal.add(pAcces, BorderLayout.NORTH);
+        cbUtilisateur = new JComboBox<String>(lUtilisateurs);
+        /* Button COnnexion */
+        bAcces = new JButton("Acceder");
+        bCreation = new JButton("Creer un compte");
+        pAcces.add(cbUtilisateur);
+        /**
+         * Button config actionListener
+         */
+        /* JDK 8 Notation */
+        bAcces.addActionListener(e -> {
+            if (cbUtilisateur.getSelectedItem() == "Abonne") {
+                controleurAccueil.afficherInterfaceAbonne(null, null, 'm', this);
+            } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
+                controleurAccueil.afficherInterfaceOrganisateur(null, null, 'm', this);
+            } else {
+                controleurAccueil.afficherInterfaceGestionnaireOrganisme(null, null, 'm', this);
+            }
+        });
+        bCreation.addActionListener(e -> {
+            if (cbUtilisateur.getSelectedItem() == "Abonne") {
+                controleurAccueil.afficherInterfaceAbonne(null, null, 'c', this);
+            } else if (cbUtilisateur.getSelectedItem() == "Organisateur") {
+                controleurAccueil.afficherInterfaceOrganisateur(null, null, 'c', this);
+            } else {
+                controleurAccueil.afficherInterfaceGestionnaireOrganisme(null, null, 'c', this);
+            }
+        });
 
-	public JComboBox<String> getCbUtilisateur() {
-		return cbUtilisateur;
-	}
-	
-	public CAccueil getControleurAccueil() {
-		return controleurAccueil;
-	}
+        /* End button config */
+        pAcces.add(bAcces);
+        pAcces.add(bCreation);
+        // Panel Consultation
+        pConsultation = new JScrollPane();
+        pConsultation.setBorder(BorderFactory.createTitledBorder("Liste d'evenements"));
+        pPrincipal.add(pConsultation, BorderLayout.CENTER);
+        // Table consultation
+        tConsultation = new JTable();
+        tConsultation.clearSelection();
+        pPrincipal.addMouseListener(new MouseAdapter() {
+            @Override
+            public void mouseEntered(MouseEvent me) {
+                tConsultation.setModel(controleurAccueil.remplirTableEvenement());
+            }
+        });
+        pConsultation.setViewportView(tConsultation);
 
-	public JButton getbAcces() {
-		return bAcces;
-	}
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setVisible(true);
+
+    }
+
+    /* M�thodes de gestion pour le controleur d'accueil*/
+    public JTable gettConsultation() {
+        return tConsultation;
+    }
+
+    public JComboBox<String> getCbUtilisateur() {
+        return cbUtilisateur;
+    }
+
+    public CAccueil getControleurAccueil() {
+        return controleurAccueil;
+    }
+
+    public JButton getbAcces() {
+        return bAcces;
+    }
 }

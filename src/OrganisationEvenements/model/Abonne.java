@@ -9,7 +9,6 @@ public class Abonne extends Personne {
     private String adresse;
     private String ville;
     private String region;
-    //private ArrayList<Evenement> evenement;
     private ArrayList<Reservation> reservation;
 
     public ArrayList<Reservation> getReservation() {
@@ -37,7 +36,6 @@ public class Abonne extends Personne {
         this.tel = "";
         this.email = "";
         this.adresse = "";
-        //evenement = new ArrayList<Evenement>();
         reservation = new ArrayList<Reservation>();
     }
 
@@ -47,7 +45,6 @@ public class Abonne extends Personne {
         this.email = email;
         this.adresse = adresse;
         this.ville=ville;
-        //evenement = new ArrayList<Evenement>();
         reservation = new ArrayList<Reservation>();
     }
 
@@ -79,49 +76,4 @@ public class Abonne extends Personne {
         this.adresse = adresse;
     }
 
-    /*public ArrayList<Evenement> getEvenement() {
-        return this.evenement;
-    }
-
-    public void setEvenement(ArrayList<Evenement> newEvenement) {
-        removeAllEvenement();
-        for (Iterator<Evenement> iter = newEvenement.iterator(); iter.hasNext();) {
-            addEvenement((Evenement) iter.next());
-        }
-    }
-
-    
-    
-    public void addEvenement(Evenement newEvenement) {
-        if (newEvenement == null) {
-            return;
-        }
-        if (this.evenement == null) {
-            this.evenement = new ArrayList<Evenement>();
-        }
-        if (!this.evenement.contains(newEvenement)) {
-            this.evenement.add(newEvenement);
-        }
-    }
-
-    public void removeEvenement(Evenement oldEvenement) {
-        if (oldEvenement == null) {
-            return;
-        }
-        if (this.evenement != null) {
-            if (this.evenement.contains(oldEvenement)) {
-                this.evenement.remove(oldEvenement);
-            }
-        }
-    }
-    
-    
-
-    public void removeAllEvenement() {
-        if (evenement != null) {
-            evenement.clear();
-        }
-    }
-    
-    */
 }

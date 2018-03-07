@@ -28,16 +28,10 @@ public class CAccueil {
     }
 
     public DefaultTableModel remplirTableEvenement() {
-        /* Bach maykonch tikrar f la table une fois revenu l accueil */
- /*if (OrganisationEvenements.getLists().getEvt().isEmpty()) {
-            OrganisationEvenements.getLists().remplirListEvtTest();
-        }*/
 
         dtmEvenement = new DefaultTableModel(entetes, 0) {
-            /* Non editable */
             @Override
             public boolean isCellEditable(int row, int column) {
-                // all cells false
                 return false;
             }
         };

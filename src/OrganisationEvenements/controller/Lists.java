@@ -60,32 +60,6 @@ public class Lists {
         }
         return o;
     }
-/*
-public void remplirListEvtTest() {
-    	Salle salle2 = new Salle("9ism ra9m 6", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
-        
-    	Salle salle3 = new Salle("9ism ra9m 7", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
-        
-    	Salle salle1 = new Salle("9ism ra9m 8", "Casa", "Dar lbaydae lkoubra", "l7ay", 8);
-        salleList.add(salle1) ; salleList.add(salle2);salleList.add(salle3);
-
-        abonneList.add(new Abonne("BOUDYACH", "Anas", "1", "1", "0614845937", "anas.boudyach@gmail.com",
-                "87 cours gambetta", "Aglou"));
-        abonneList.add(new Abonne("BOUDYACH1", "Anas1", "2", "2", "0614845937", "anas.boudyach@gmail.com",
-                "87 cours gambetta", "Aglou"));
-        abonneList.add(new Abonne("BOUDYACH2", "Anas2", "3", "3", "0614845937", "anas.boudyach@gmail.com",
-                "87 cours gambetta", "Aglou"));
-        evt.add(new Evenement("cont", "yarebbinkouneghikanhle", "detail1", "Aglou", 2));
-        evt.add(new Evenement("cont1", "Swing", "detail2", "Asfi", 10));
-        evt.add(new Evenement("cont2", "yarebbinkouneghikanhle2", "detail3", "rabat", 10));
-        evt.add(new Evenement("cont3", "yarebbinkouneghikanhle3", "detail4", "lyon", 101));
-        evt.add(new Evenement("cont4", "yarebbinkouneghikanhle4", "detail5", "khemisset", 10));
-        organisateurList.add(new Organisateur("Monsieur","Bouzix","1","1","845665","bouzix@gmail.com"));
-
-        gestionnaireOrganismeList.add(new GestionnaireOrganisme("BOUDYACH", "Anas", "1", "1"));
-
-    }
-*/
     public ArrayList<Abonne> getAbonneList() {
         return abonneList;
     }

@@ -430,7 +430,7 @@ public class InterfaceOrganisateur extends JFrame {
                     organisateur.setEmail(tEmail.getText());
                     OrganisationEvenements.getLists().getOrganisateurList().add(organisateur);
                     OrganisationEvenements.getFenetreAccueil().getControleurAccueil().afficherInterfaceOrganisateur(organisateur.getLogin(), organisateur.getMdp(), 'm', this);
-                    JOptionPane.showMessageDialog(this, "Compte cree avec succes ! Yala raw3a :D !");
+                    JOptionPane.showMessageDialog(this, "Compte cree avec succes !");
                     this.dispose();
                 } else {
                     JOptionPane.showMessageDialog(this, "Confirmez votre mot de passe");
