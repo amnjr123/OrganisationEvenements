@@ -29,7 +29,7 @@ public class CAccueil {
 
     public DefaultTableModel remplirTableEvenement() {
         /* Bach maykonch tikrar f la table une fois revenu l accueil */
-        /*if (OrganisationEvenements.getLists().getEvt().isEmpty()) {
+ /*if (OrganisationEvenements.getLists().getEvt().isEmpty()) {
             OrganisationEvenements.getLists().remplirListEvtTest();
         }*/
 
@@ -166,6 +166,9 @@ public class CAccueil {
                     frame.setVisible(false);
                     new InterfaceGestionnaireOrganisme(ab, nature);
                 }
+            }
+            if (!exist) {
+                JOptionPane.showMessageDialog(frame, "Compte Organisateur non trouve, penser a en creer un");
             }
         } else {
             new InterfaceGestionnaireOrganisme(ab, 'c');
