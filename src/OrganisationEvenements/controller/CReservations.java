@@ -27,7 +27,6 @@ public class CReservations {
                 System.out.print(e.getTitre());
                 return e;
             }
-            System.out.print("mal9a walou");
         }
         return null;
     }
@@ -37,16 +36,17 @@ public class CReservations {
             if (r.getEvenement() == e && r.getNbPlaces() == nbPlaces) {
                 return r;
             }
-            System.out.print("mal9a walou");
         }
         return null;
     }
-
+// 
     public int placesDisponibles(Evenement e) {
         int nbPlacesDispo = e.getQuota();
         for (Abonne a : lse.getAbonneList()) {
             for (Reservation r : a.getReservation()) {
-                nbPlacesDispo = nbPlacesDispo - r.getNbPlaces();
+                if (r.getEvenement()==e){
+                    nbPlacesDispo = nbPlacesDispo - r.getNbPlaces();
+                }
             }
         }
         return nbPlacesDispo;
@@ -60,9 +60,9 @@ public class CReservations {
                 if (nbPlaces > 0) {
                     ab.getReservation().add(new Reservation(ev, nbPlaces));
                     if (nbPlaces == 1) {
-                        JOptionPane.showMessageDialog(new JFrame(), "Une place a ete reservee avec sussces pour l'evenement " + ev.getTitre() + " ! Yala raw3a");
+                        JOptionPane.showMessageDialog(new JFrame(), "Une place a ete reservee avec sussces pour l'evenement " + ev.getTitre() + " !");
                     } else {
-                        JOptionPane.showMessageDialog(new JFrame(), nbPlaces + " places ont ete reservees avec sussces pour l'evenement " + ev.getTitre() + " ! Yala raw3a");
+                        JOptionPane.showMessageDialog(new JFrame(), nbPlaces + " places ont ete reservees avec sussces pour l'evenement " + ev.getTitre() + " !");
                     }
 
                 } else {
@@ -77,7 +77,7 @@ public class CReservations {
 
             }
         } catch (Exception e) {
-            JOptionPane.showMessageDialog(new JFrame(), "Kteb lia chi haja SAHIHA !");
+            JOptionPane.showMessageDialog(new JFrame(), "Erreur !");
         }
 
     }
@@ -126,7 +126,6 @@ public class CReservations {
         String villeAbonne = a.getVille();
         String regionAbonne = a.getRegion();
         for (Evenement e : lse.getEvt()) {
-            //System.out.println(a.getVille());
             if (a.getVille().equalsIgnoreCase(e.getVilleConcernee())) {
                 String type = e.getType();
                 String titre = e.getTitre();
